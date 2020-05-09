@@ -1,6 +1,7 @@
 * {
   margin:0px;
   padding:0px;
+  text-align: center
 }
 
 #octocat {
@@ -15,3 +16,34 @@ p {
   margin: 50px auto;
   font: 30px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
 }
+ul.nav {
+
+    margin:0;
+    padding:0;
+    list-style:none;
+    height:36px; line-height:36px;
+    background:black; /* you can change the backgorund color here. */
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:13px;
+    text-align: center;
+}
+ul.nav li {
+    border-right:1px solid red; /* you can change the border color matching to your background color */
+    float:left;
+}
+ul.nav a {
+
+    display:inline-block;
+    padding:0 28px;
+    color:#ccece6;
+    text-decoration:none;
+}
+ul.nav a:hover,
+ul.nav li.current a {
+    background:red;
+}
+h1 {
+	color: white
+
+}
+
