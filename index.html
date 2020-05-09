@@ -7,25 +7,67 @@
   <LINK href="styles.css" rel="stylesheet" type="text/css">
 </head>
 
-<body style="background-color:grey;">
+<body style="background-color:black;">
 
+	
+	<nav class="nav">
+  		<a href="#Contact">Contact</a>
+  		<a href="#Projects">Projects</a>
+  		<a href="#AboutMe">About Me</a>
+  		<a href="#">Home</a>
+	</nav>
 	<header role="banner" id="top">
 <div id="header-text">
     <h1><strong id="top-title">Isaac A. Perez</strong></h1>
   
 </div>
-	<ul class="nav">
-  		<li><a href="#">Home</a></li>
-  		<li><a href="#">Bio</a></li>
-  		<li><a href="#">Projects</a></li>
-  		<li><a href="#">Contact</a></li>
-	</ul>
+<div id="AboutMe">
+    <h1>About me</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  
+</div>
+<div id="Projects">
+    <h1>My Projects</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  
+</div>
+<div id="Contact">
+    <h1>Contact me</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  
+</div>
 	
 
-<img src="images/myCat.png" id="octocat" alt="octocat-gif" />
 
-<!-- Change this code here by copy and pasting your template on line 15 -->
-<p>Welcome to your first GitHub Pages website!</p>
+<script> // When the user scrolls the page, execute myFunction
+window.onscroll = function() {myFunction()};
 
-</body>
-</html>
+// Get the navbar
+var navbar = document.getElementById("navbar");
+
+// Get the offset position of the navbar
+var sticky = navbar.offsetTop;
+
+// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}</script>
