@@ -9,9 +9,10 @@ var sticky = navbar.offsetTop;
 
 // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
 function myFunction() {
-  if (window.pageYOffset >= sticky) {
-    navbar.classList.add("sticky")
+  var x = document.getElementById("nav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
   } else {
-    navbar.classList.remove("sticky");
+    x.className = "topnav";
   }
 }
