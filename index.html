@@ -1,61 +1,241 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.1.1">
+    <title>Isaac's Personal Website</title>
 
-<html>
-<head>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Isaac A. Perez</title>
-  <LINK href="styles.css" rel="stylesheet" type="text/css">
-</head>
+    <!-- Bootstrap core CSS -->
+<link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<body >
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
 
-	<div id="header-wrapper">
-	<div id="header" class="container">
-		<div id="menu">
-			<ul>
-				<li class="current_page_item"><a href="#" accesskey="1" title="">Homepage</a></li>
-				<li><a href="TeamUp/index.html" accesskey="2" title="">TeampUp</a></li>
-				<li><a href="#AboutMe" accesskey="3" title="">About Us</a></li>
-				<li><a href="#Projects" accesskey="4" title="">Careers</a></li>
-				<li><a href="#Contact" accesskey="5" title="">Contact Us</a></li>
-			</ul>
-		</div>
-	</div>
-	<div id="intro">
-		<h1>Hi, my name is</h1>
-		<h1>Isaac Perez.</h1>
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="carousel.css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="#">Isaac Perez</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://apps.apple.com/us/app/id1528119357">TeamUp</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+      <form class="form-inline mt-2 mt-md-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+</header>
 
-	</div>
-</div>
-	
-	
-	
-	
+<main role="main">
 
-	
-	<div id="AboutMe">
-	    <h1>About me</h1>
-	    <span>I am a first-generation college student at the University of California, Berkeley. I am majoring in Electrical Engineering and Computer Science (EECS). I am a detailed and solution-orientated person with a passion for innovative and cost-effective software that aims to eliminate technological barriers for people around the world. </span>
-	</div>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/>
+        </svg>
+        <div class="container">
+          <div class="carousel-caption text-left">
+            <h1>Welcome.</h1>
+            <p>Thanks for taking the time to view my website. I hope you get to learn more about who I am and what I work on.</p>
+            <p><a class="btn btn-lg btn-primary" href="#" role="button">View resume</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>A look into my thoughts.</h1>
+            <p>I will try to write about things I am passionate about, take a look!</p>
+            <p><a class="btn btn-lg btn-primary" href="#" role="button">Click here</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
+        <div class="container">
+          <div class="carousel-caption text-right">
+            <h1>Who am I outside of tech?</h1>
+            <p>Take a look at my interest and hobbies outside school/tech.</p>
+            <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
 
-	<div id="Projects">
-	    <h1>My Projects</h1>
-	    <p><a href="https://github.com/IsaacAPerez/Isaac-s-Pizza-Planet">Isaac's Pizza Planet:</a> This iOS game application is a simple 2-d game that takes advantage of Apples SpriteKit libraries as well as others. By utilizing Xcode's seamless integration with iOS application, I was able to use StoryBoards and Game Scenes to sketch out the apperance of the game.The ideaologies of MVC was also incorperated into this application.</p>
-	    <img src="images/introiphone.png" style = "max-width:75%;" >
-	    <img src="images/justPhone.png" style = "max-width:75%;" >
-	</div>
 
-	<div id="Contact">
-	    <h1>Contact me</h1>
-	    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	    proident, sunt in culpa qui officia deserunt mollit anim id est laborum. rrge ermhgtrth, erthththetg,erger ergefrgergerg</p>
-	</div>
-	
+  <!-- Marketing messaging and featurettes
+  ================================================== -->
+  <!-- Wrap the rest of the page in another container to center all the content. -->
+
+  <div class="container marketing">
+
+    <!-- Three columns of text below the carousel -->
+    <div class="row">
+      <div class="col-lg-4">
+        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg"  preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
+        	<image href="isaac.jpg" x = "-20%" y = "-35%" height="200%" width="200%"></svg>
+        <h2>Student</h2>
+        <p>I am a first-generation college student at the University of California, Berkeley majoring in Electrical Engineering and Computer Science (EECS). I am passionate about creating software that aims to elimate barriers for those in underserved communities.</p>
+        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#FFFFFF"/><text x="50%" y="50%" fill="#777" dy=".3em"></text>
+        	<image href="ios.png"  x = "0%" y = "8%" height="80%" width="100%"></svg>
+        <h2>iOS Developer</h2>
+        <p>Outside of school I develop iOS apps on my free time. I currently have one app called 'TeamUp: Find Your Game' in the App Store. I also have more iOS apps on my Github, take a look! Currently learning SwiftUI with plans to create apps for all Apple products! </p>
+        <p><a class="btn btn-secondary" href="#" role="button">View App &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
+        	<image href="tutor.png" height="100%" width="100%"></svg></svg>
+        <h2>Tutor</h2>
+        <p>Love to give back to my community through tutoring. I have tutor high school students at my local Boys and Girls Club for the past 3 years. From math homework to SAT/ACT prep I promote higher education to all students while mentoring them through their journey.</p>
+
+        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
 
 
+    <!-- START THE FEATURETTES -->
 
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading">TeamUp: Find Your Game. <span class="text-muted">Published iOS app.</span></h2>
+        <p class="lead">TeamUp was made to create a community that promotes physical and mental wellness in a fun and easy way. This app allows people to connect with others to engage in various sports. Users can see posts around their current location and also create post. TeamUp took an minimalistic approach to help users view,create, and connect with others.</p>
+      </div>
+      <div class="col-md-5">
+        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
+        	<image href="phones.png" height="100%" width="100%"></svg>
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7 order-md-2">
+        <h2 class="featurette-heading">T-PREP <span class="text-muted">Transfer Pre-Engineering Program</span></h2>
+        <p class="lead">Summer program that allowed me to get a head start in my education at Cal. I was able to connect with other incoming engineering students and faculty. We were organized into teams where we were tasked to create a product that was aimed to combat vital issues around the world. My team and I created Xpired where our goal was to combat food waste on a large scale through small scale applications.</p>
+      </div>
+      <div class="col-md-5 order-md-1">
+        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#FFFFFF" rx = "15"/><text x="50%" y="50%" fill="#aaa" dy=".3em"></text>
+        	<image href="tprep.png" height="100%" width="100%"></svg>
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+<!--T
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
+        <p class="lead">Summer program that allowed me to get a head start in my education at Cal. I was able to connect with other incoming engineering students and faculty. We were organized into teams where we were tasked to create a product that was aimed to combat vital issues around the world. My team and I created Xpired where our goal was to combat food waste on a large scale through small scale applications.</p>
+      </div>
+      <div class="col-md-5">
+        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee" rx = "15"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+    -->
+
+    <!-- /END THE FEATURETTES -->
+
+  </div><!-- /.container -->
+
+
+  <!-- FOOTER -->
+ 
+<footer id="colophon" class="site-footer" role="contentinfo">
+  <div class="social-wrapper">
+    <ul>
+      <li>
+        <a href="#" target="_blank">
+          <img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/twitter-128.png" alt="Twitter Logo" class="twitter-icon"></a>
+      </li>
+      <li>
+        <a href="#" target="_blank">
+          <img src="https://www.mchenryvillage.com/images/instagram-icon.png" alt="Instagram Logo" class="instagram-icon"></a>
+      </li>
+      <li>
+        <a href="#" target="_blank">
+          <img src="linkedin.png" alt="Linkedin Logo" class="linkedin-icon"></a>
+      </li>
+      <li>
+        <a href="#" target="_blank">
+          <img src="http://www.iconarchive.com/download/i54037/danleech/simple/facebook.ico" alt="Facebook Logo" class="facebook-icon"></a>
+      </li>
+      <li>
+        <a href="#" target="_blank">
+          <img src="http://icons.iconarchive.com/icons/marcus-roberto/google-play/256/Google-plus-icon.png" alt="Googleplus Logo" class="googleplus-icon"></a>
+      </li>
+      <li>
+        <a href="#" target="_blank">
+          <img src="https://lh3.googleusercontent.com/j_RwVcM9d47aBDW5DS1VkdxUYCkDUCB6wZglv4x-9SmsxO0VaFs7Csh-FmKRCWz9r_Ef=w170" alt="Youtube Logo" class="youtube-icon"></a>
+      </li>
+      <li>
+        <a href="#" target="_blank">
+          <img src="http://www.iconarchive.com/download/i94258/designbolts/vector-foursquare/Foursquare-2.ico" alt="Foursquare Logo" class="foursquare-icon"></a>
+      </li>
+    </ul>
+  </div>
+
+  <nav class="footer-nav" role="navigation">
+    <p>Copyright &copy; 2013-
+      <?php echo date("Y"); ?> Cisco Rendon. All rights reserved.</p>
+  </nav>
+</footer>
+<!-- #colophon -->
+
+</main>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+</html>
