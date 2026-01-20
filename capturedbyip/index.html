@@ -581,6 +581,70 @@
       }
     }
     
+    /* -------------------- Video Gallery -------------------- */
+    
+    .cbip-video-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: var(--space-4);
+    }
+    
+    .cbip-video-item {
+      position: relative;
+      aspect-ratio: 9/16;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background: #111;
+      transition: transform var(--duration-normal) var(--ease-default);
+    }
+    
+    .cbip-video-item:hover {
+      transform: translateY(-8px);
+    }
+    
+    .cbip-video-item iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    .cbip-video-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: var(--space-6) var(--space-4) var(--space-4);
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      z-index: 2;
+      pointer-events: none;
+    }
+    
+    .cbip-video-label span {
+      font-size: var(--text-sm);
+      font-weight: var(--font-medium);
+      color: var(--color-white);
+    }
+    
+    @media (max-width: 1024px) {
+      .cbip-video-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    @media (max-width: 640px) {
+      .cbip-video-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-3);
+      }
+      
+      .cbip-video-item {
+        border-radius: var(--radius-lg);
+      }
+    }
+    
     /* -------------------- CTA Section -------------------- */
     
     .cbip-cta {
@@ -886,53 +950,60 @@
           </p>
         </div>
         
-        <div class="cbip-work-grid">
-          <div class="cbip-work-item" data-animate="fade-in-up">
-            <div class="cbip-work-placeholder">
-              <svg class="cbip-work-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                <circle cx="8.5" cy="8.5" r="1.5"/>
-                <polyline points="21 15 16 10 5 21"/>
-              </svg>
-            </div>
-            <div class="cbip-work-overlay"></div>
-            <span class="cbip-work-label">Sports — Game Day</span>
+        <div class="cbip-video-grid">
+          <!-- Sports Video -->
+          <div class="cbip-video-item" data-animate="fade-in-up">
+            <iframe 
+              src="https://www.youtube.com/embed/Fa_GbNsNZyY" 
+              title="Sports Coverage" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+            <div class="cbip-video-label"><span>Sports</span></div>
           </div>
           
-          <div class="cbip-work-item" data-animate="fade-in-up" style="animation-delay: 100ms;">
-            <div class="cbip-work-placeholder">
-              <svg class="cbip-work-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                <circle cx="8.5" cy="8.5" r="1.5"/>
-                <polyline points="21 15 16 10 5 21"/>
-              </svg>
-            </div>
-            <div class="cbip-work-overlay"></div>
-            <span class="cbip-work-label">Real Estate — Aerial</span>
+          <!-- Real Estate Drone Video -->
+          <div class="cbip-video-item" data-animate="fade-in-up" style="animation-delay: 100ms;">
+            <iframe 
+              src="https://www.youtube.com/embed/4osFpWDdcGk" 
+              title="Real Estate Drone" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+            <div class="cbip-video-label"><span>Real Estate</span></div>
           </div>
           
-          <div class="cbip-work-item" data-animate="fade-in-up" style="animation-delay: 200ms;">
-            <div class="cbip-work-placeholder">
-              <svg class="cbip-work-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                <circle cx="8.5" cy="8.5" r="1.5"/>
-                <polyline points="21 15 16 10 5 21"/>
-              </svg>
-            </div>
-            <div class="cbip-work-overlay"></div>
-            <span class="cbip-work-label">Lifestyle — Creator</span>
+          <!-- Lifestyle - Pop Up Vendor -->
+          <div class="cbip-video-item" data-animate="fade-in-up" style="animation-delay: 200ms;">
+            <iframe 
+              src="https://www.youtube.com/embed/M5nzgzTZtvE" 
+              title="Lifestyle - Pop Up" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+            <div class="cbip-video-label"><span>Lifestyle</span></div>
           </div>
           
-          <div class="cbip-work-item" data-animate="fade-in-up" style="animation-delay: 300ms;">
-            <div class="cbip-work-placeholder">
-              <svg class="cbip-work-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                <circle cx="8.5" cy="8.5" r="1.5"/>
-                <polyline points="21 15 16 10 5 21"/>
-              </svg>
-            </div>
-            <div class="cbip-work-overlay"></div>
-            <span class="cbip-work-label">Brand — Session</span>
+          <!-- Lifestyle - Church Promo -->
+          <div class="cbip-video-item" data-animate="fade-in-up" style="animation-delay: 300ms;">
+            <iframe 
+              src="https://www.youtube.com/embed/c5WViCONClQ" 
+              title="Lifestyle - Church Promo" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+            <div class="cbip-video-label"><span>Promo</span></div>
+          </div>
+          
+          <!-- Drone - San Pedro -->
+          <div class="cbip-video-item" data-animate="fade-in-up" style="animation-delay: 400ms;">
+            <iframe 
+              src="https://www.youtube.com/embed/GWT_bpOAOnk" 
+              title="Drone - San Pedro" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+            <div class="cbip-video-label"><span>Drone</span></div>
           </div>
         </div>
       </div>
