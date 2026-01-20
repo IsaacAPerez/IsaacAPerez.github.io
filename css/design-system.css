@@ -638,7 +638,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 :root[data-theme="dark"] .nav-links {
-  background-color: rgba(29, 29, 31, 0.98);
+  background-color: #1d1d1f;
 }
 
 /* System preference dark mode nav */
@@ -667,7 +667,7 @@ h1, h2, h3, h4, h5, h6 {
   }
   
   :root:not([data-theme="light"]) .nav-links {
-    background-color: rgba(29, 29, 31, 0.98);
+    background-color: #1d1d1f;
   }
 }
 
@@ -784,7 +784,7 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: flex-start;
     gap: 0;
     padding-top: var(--space-8);
-    background-color: var(--color-surface);
+    background-color: #ffffff;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
@@ -792,7 +792,7 @@ h1, h2, h3, h4, h5, h6 {
   }
   
   .nav-dark .nav-links {
-    background-color: var(--color-gray-900);
+    background-color: #1d1d1f;
   }
   
   .nav-links.active {
@@ -805,6 +805,18 @@ h1, h2, h3, h4, h5, h6 {
     display: block;
     padding: var(--space-4) var(--space-6);
     font-size: var(--text-lg);
+  }
+  
+  /* Dark mode mobile nav - system preference */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .nav-links {
+      background-color: #1d1d1f;
+    }
+  }
+  
+  /* Dark mode mobile nav - manual toggle */
+  :root[data-theme="dark"] .nav-links {
+    background-color: #1d1d1f;
   }
 }
 
