@@ -1,6 +1,6 @@
 # IsaacPerez.co — operating manual
 
-Personal brand site at https://isaacperez.co: one hand-written landing page (`index.html`, ~360 lines) with a canvas mini-game overlay ("Isaac's Studio", `js/game.js`, ~1.6k lines), plus App Store-linked legal pages for the Crib iOS app under `/roommate/privacy/` and `/roommate/terms/`. Pure static — vanilla HTML/CSS/JS, no package.json, no build, no tests, no CI. Hosted on Vercel (project `isaacperez`, id `prj_sSFEIZN5xWUB25tlxb7MxXUADcmZ`, team `team_kglkY3kYg639waIJAEOnAyuQ`, root `.`), auto-deploying `main` from GitHub `IsaacAPerez/IsaacPerez.co`.
+Personal brand site at https://isaacperez.co: one hand-written landing page (`index.html`, ~360 lines) with a canvas mini-game overlay ("Isaac's Studio", `js/game.js`, ~1.6k lines), plus App Store-linked legal pages for the Quarters iOS app under `/roommate/privacy/` and `/roommate/terms/`. Pure static — vanilla HTML/CSS/JS, no package.json, no build, no tests, no CI. Hosted on Vercel (project `isaacperez`, id `prj_sSFEIZN5xWUB25tlxb7MxXUADcmZ`, team `team_kglkY3kYg639waIJAEOnAyuQ`, root `.`), auto-deploying `main` from GitHub `IsaacAPerez/IsaacPerez.co`.
 Prime directive: the repo tree IS the site and a push to main IS a production deploy — keep it vanilla, and preview before you ship anything user-visible.
 
 ## Commands
@@ -70,7 +70,7 @@ Deploy:
 Decide autonomously: typo fixes, code-level refactors within a file's existing style, sitemap/canonical bookkeeping for approved page adds, in-place image optimization.
 STOP and ask Isaac (show a local preview URL/screenshot and the exact diff when asking):
 - Anything user-visible on the landing page (hero copy, sections, styling, redesigns) — push is instant prod with no staging; get an OK before `git push`.
-- `/roommate/privacy/` and `/roommate/terms/`: App Store-linked legal pages for Crib. Never change legal substance, move, or delete; copy edits beyond typos need sign-off. The `/roommate/` path is permanent despite the Crib rebrand — never "fix" it.
+- `/roommate/privacy/` and `/roommate/terms/`: App Store-linked legal pages for Quarters. Never change legal substance, move, or delete; copy edits beyond typos need sign-off. The `/roommate/` path is permanent despite the app being renamed (RoommateApp → Crib → Quarters) — never "fix" it. The app name in the page copy was updated Crib → Quarters on 2026-08-10; when doing that kind of rename, match `\bCrib\b` case-sensitively — a case-insensitive replace corrupts the word "des**crib**es" in the privacy policy.
 - Renaming/moving ANY public URL (`/`, `/roommate/privacy/`, `/roommate/terms/`) — external systems point at them; if approved, update sitemap + canonicals in the same commit.
 - `Resume.pdf` and `isaac.JPG` are Isaac's real resume/photo — replace only on explicit request.
 - Vercel project/domain/DNS settings, `vercel link`, or any manual `vercel --prod` — prefer git push; ask first.
