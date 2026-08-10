@@ -108,6 +108,10 @@ a { color: inherit; text-decoration: none; }
 }
 .nav-links a:hover { color: var(--text); }
 .nav-links a:hover::after { width: 100%; }
+/* current page/section marker — the nav is identical on every page,
+   so this is the only thing that differs between them */
+.nav-links a.here { color: var(--text); }
+.nav-links a.here::after { width: 100%; }
 .theme-btn {
   width: 34px; height: 34px;
   display: grid; place-items: center;
@@ -142,6 +146,8 @@ a { color: inherit; text-decoration: none; }
 .btn-text { color: var(--accent); }
 .btn-text .arrow { transition: transform 0.3s var(--ease); }
 .btn-text:hover .arrow { transform: translateX(4px); }
+/* a card carrying more than one call to action */
+.card-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
 
 /* ============ REVEAL MOTION ============ */
 [data-reveal] {

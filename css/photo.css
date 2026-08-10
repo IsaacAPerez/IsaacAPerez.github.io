@@ -4,9 +4,8 @@
    no new palette, no new type scale. Light & dark. Vanilla.
    ============================================================ */
 
-/* ============ NAV: current-page marker ============ */
-.nav-links a.here { color: var(--text); }
-.nav-links a.here::after { width: 100%; }
+/* nav + its .here current-page marker live in site.css — the nav is
+   identical on every page and must stay that way */
 
 /* ============ SUBPAGE HERO ============
    Same recipe as .hero on the landing page, shorter — a subpage
