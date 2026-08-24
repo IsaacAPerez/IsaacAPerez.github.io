@@ -4,6 +4,7 @@ Personal brand site at https://isaacperez.co: one hand-written landing page (`in
 Prime directive: the repo tree IS the site and a push to main IS a production deploy — keep it vanilla, and preview before you ship anything user-visible.
 
 ## Commands
+- Rebuild the architecture atlas after changing how IsaacPerez.co works: `node docs/atlas/build.mjs` (edit `docs/atlas/data.mjs` only — `atlas.html` and `SYSTEM.md` are generated). It renders inside IsaacPerez.co's tab in the CodeByIP app, with a drift count since `data.mjs` was last committed; `docs/atlas/README.md` explains the set.
 - Preview: `python3 -m http.server 8000` from repo root, open http://localhost:8000. No build step — any static server works.
 - Deploy prod: `git push origin main` (Vercel auto-deploys; no CI, no staging gate).
 - Manual deploy (avoid; ask first for prod): `vercel` (preview) / `vercel --prod` — CLI at `/opt/homebrew/bin/vercel`.
