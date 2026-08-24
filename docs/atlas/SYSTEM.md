@@ -2,7 +2,7 @@
 
 _**This file is the living source of truth for the shape of isaacperez.co.** The interactive atlas is built from the same data._
 
-_Question status: **8 open · 4 resolved**._
+_Question status: **7 open · 5 resolved**._
 
 ## One paragraph
 
@@ -183,23 +183,23 @@ whole pipeline.
 
 #### A · Achievements
 
-**In one line.** Seven badges that pop as a visitor explores, plus a hidden cheat code — and one more badge in the table that nothing ever awards.
+**In one line.** Eight badges that pop as a visitor explores, plus a hidden cheat code that does not count toward the total.
 
-**What it does.** Read the app phones, the framed jobs, the shelf, the contact console — each group pops a toast the first time. Toggling the theme counts. Touring every exhibit fires confetti and a fanfare. And the old arrow-arrow-B-A cheat code still does something. One entry in the table, "Stepped Inside", has no caller anywhere in the repo, so the HUD counter stops at 7 of 8.
+**What it does.** Read the app phones, the framed jobs, the shelf, the contact console — each group pops a toast the first time. Toggling the theme counts. Touring every exhibit fires confetti and a fanfare. And the old arrow-arrow-B-A cheat code still does something. "Stepped Inside" lands the moment the office opens, so the HUD counter can reach 8 of 8.
 
-**How it's built.** An inline IIFE at the bottom of `index.html`, not a file. It owns a nine-entry table (emoji + label), reads and writes `localStorage["ip-achievements"]`, and publishes `window.unlock(id)`, which builds a `.toast` node into `#toastStack` and removes it after 4.6s. `js/game.js` calls it through `gUnlock()` from `markVisited()`, mapping `e.group` (`project`, `crystal`, `study`, `contact`, `statue`) to a badge, while `index.html` itself unlocks only `shifter` and `konami` — seven awardable ids plus `konami`, because `adventurer` sits in the table with no caller. `syncAchCount()` filters `konami` out and renders **n/8**, a counter that tops out at 7/8. A second Konami listener lives here on `window`, in parallel with the game's own — `unlock()` de-dupes.
+**How it's built.** An inline IIFE at the bottom of `index.html`, not a file. It owns a nine-entry table (emoji + label), reads and writes `localStorage["ip-achievements"]`, and publishes `window.unlock(id)`, which builds a `.toast` node into `#toastStack` and removes it after 4.6s. `js/game.js` calls it through `gUnlock()` from `markVisited()`, mapping `e.group` (`project`, `crystal`, `study`, `contact`, `statue`) to a badge, and from `openOverlay()` for `adventurer`, while `index.html` itself unlocks only `shifter` and `konami` — eight countable ids plus `konami`. `syncAchCount()` filters `konami` out and renders **n/8**, a counter that now tops out at a real 8/8. A second Konami listener lives here on `window`, in parallel with the game's own — `unlock()` de-dupes.
 
 **Steps in execution.**
 
 1. **Rehydrate** — Parse localStorage["ip-achievements"] into a Set inside a try/catch.
 2. **Publish** — Expose window.unlock(id) so the game (and the theme button) can call it without importing anything.
 3. **Award** — On a new id: add, persist, and append a toast to #toastStack.
-4. **Count** — game.js syncAchCount() re-reads the store, drops konami, and writes "n/8" into the HUD — 7/8 is the real ceiling.
+4. **Count** — game.js syncAchCount() re-reads the store, drops konami, and writes "n/8" into the HUD — 8/8 is the ceiling.
 5. **Complete** — When all 23 core exhibits are visited the game unlocks completionist, bursts particles and plays the fanfare — once, guarded by state.confetti.
 
 **Questions.**
 
-- **Q-A1** `adventurer` (🚪 "Stepped Inside") is defined in the badge table at `index.html:376` but nothing ever calls `unlock('adventurer')` — `js/game.js` only unlocks quests / statcheck / lorekeeper / raven / historian / completionist / konami, and `index.html` adds shifter. Since `syncAchCount()` counts against a literal 8, the HUD can never read 8/8. Award it on the first `openOverlay()`, or drop the entry and count against 7?
+- ~~**Q-A1** `adventurer` (🚪 "Stepped Inside") is defined in the badge table at `index.html:376` but nothing ever calls `unlock('adventurer')` — `js/game.js` only unlocks quests / statcheck / lorekeeper / raven / historian / completionist / konami, and `index.html` adds shifter. Since `syncAchCount()` counts against a literal 8, the HUD can never read 8/8. Award it on the first `openOverlay()`, or drop the entry and count against 7?~~ ✓ Wired, not dropped: `openOverlay()` now calls `gUnlock('adventurer')` just before its existing `syncAchCount()`. Opening the office — via the "Explore my office" button or the `#office` deep link — is literally "Stepped Inside", so the badge has the trigger its emoji and label already implied, and the literal 8 becomes honest at 8 awardable ids (2026-08-24).
 
 #### S · Browser storage
 
@@ -393,7 +393,7 @@ Reference by ID. ✓ resolved (with date) · otherwise open.
 - **Q-G2** (G) Three guards skip an entity id `shrine_taco` that no longer exists in `ENTITIES`, while `wall_cracked` (the mini-fridge) is filtered out once `state.vaultOpen` is true — so the fridge can only ever be opened once per browser and its `else sfx("blip")` branch is unreachable. Was a second secret meant to take its place?
 - **Q-G3** (G) `sessionStorage["ip-game-skip"]` is written on every exit and cleared on re-entry but is never read anywhere — a leftover from when the office was the landing experience instead of an opt-in. Remove it, or wire it back up?
 - ~~**Q-T1**~~ (T) ✓ Deliberate. CLAUDE.md rules that the inline pre-paint script stays verbatim in `<head>` before the stylesheets — never externalized, never deferred — because it exists to prevent FOUC (2026-08-24).
-- **Q-A1** (A) `adventurer` (🚪 "Stepped Inside") is defined in the badge table at `index.html:376` but nothing ever calls `unlock('adventurer')` — `js/game.js` only unlocks quests / statcheck / lorekeeper / raven / historian / completionist / konami, and `index.html` adds shifter. Since `syncAchCount()` counts against a literal 8, the HUD can never read 8/8. Award it on the first `openOverlay()`, or drop the entry and count against 7?
+- ~~**Q-A1**~~ (A) ✓ Wired, not dropped: `openOverlay()` now calls `gUnlock('adventurer')` just before its existing `syncAchCount()`. Opening the office — via the "Explore my office" button or the `#office` deep link — is literally "Stepped Inside", so the badge has the trigger its emoji and label already implied, and the literal 8 becomes honest at 8 awardable ids (2026-08-24).
 - ~~**Q-H1**~~ (H) ✓ No, by design. There is no package.json, no .github/ directory and no self-hosted runner for IsaacPerez.co (the eight runners on this Mac cover other repos). Vercel's git integration is the entire pipeline, and CLAUDE.md forbids adding tooling to "fix" it (2026-08-24).
 - **Q-V1** (V) Nothing in the repo redirects the retired `capturedbyip.com` to `/photo/` — there is no `vercel.json` at all. Is that handled in the Vercel dashboard or at DNS, and does it need writing down somewhere in-tree?
 - **Q-O1** (O) CLAUDE.md still says the sitemap holds "currently exactly `/`, `/roommate/privacy/`, `/roommate/terms/`", but it has held five URLs since the `/photo/` merge on 2026-08-08. The operating manual needs that line refreshed — should it name the URLs at all, or just point at the grep?

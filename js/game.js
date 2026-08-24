@@ -1578,6 +1578,8 @@
     if (REDUCED) startScreen.classList.add('rm');
     hud.hidden = true; progress.hidden = true;
     resize();
+    // Opening the office is "Stepped Inside" — the only trigger for this badge.
+    gUnlock('adventurer');
     syncAchCount();
   }
   function startGame() {
