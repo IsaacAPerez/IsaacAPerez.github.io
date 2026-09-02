@@ -9,22 +9,24 @@ export const META = {
   artifactUrl: '',
   sourcePath: 'docs/atlas/data.mjs',
   buildCmd: 'node docs/atlas/build.mjs',
-  stats: [{ k: 'Product', v: 'isaac-perez-co · static' }, { k: 'Public URLs', v: '5' }],
+  stats: [{ k: 'Product', v: 'isaac-perez-co · static' }, { k: 'Public URLs', v: '8' }],
   intro: `_**This file is the living source of truth for the shape of isaacperez.co.** The interactive atlas is built from the same data._`,
-  onePara: `IsaacPerez.co is Isaac's personal brand site: five public URLs of hand-written static
+  onePara: `IsaacPerez.co is Isaac's personal brand site: eight public URLs of hand-written static
 HTML with no package.json, no bundler, no tests and no CI. The landing page carries the work,
 experience and contact sections; two pages under /photo/ are the CapturedByIP photo-and-video
-practice, folded in from its own domain in August 2026; two pages under /roommate/ are the App
-Store-linked legal pages for the Quarters iOS app. The one piece of real engineering is
-js/game.js — a 1,645-line canvas game called "Isaac's Studio" that overlays the landing page and
+practice, folded in from its own domain in August 2026; /shootsort/ is the download page for the
+macOS card organizer; and four legal-style pages serve two iOS apps — /roommate/{privacy,terms,support}
+for Quarters and /souvenir/privacy/ for Souvenir. The one piece of real engineering is
+js/game.js — a ~1,700-line canvas game called "Isaac's Studio" that overlays the landing page and
 lets a visitor walk a home office and press E on 23 exhibits that are the portfolio. Everything
 ships as files: a push to main is a production deploy, because Vercel's git integration is the
-whole pipeline.`,
+whole pipeline — the only config in the tree is vercel.json, a response-headers block.`,
   costModel: [],
   deepDive: '',
   platformGives: `Vercel hosts the repo directly — git integration on <code>main</code>, TLS on the apex
-domain, the CDN, and extensionless URLs for directory-style pages — with no vercel.json and no build
-command in the repo. GitHub stores the source. The fleet platform repo supplies the git hooks this
+domain, the CDN, and extensionless URLs for directory-style pages — with no build command in the repo
+and a <code>vercel.json</code> that carries response headers only (CSP, nosniff, X-Frame-Options,
+Referrer-Policy, Permissions-Policy). GitHub stores the source. The fleet platform repo supplies the git hooks this
 repo points at via <code>core.hooksPath</code> → <code>~/Coding/platform/scripts/hooks</code>:
 <code>commit-msg</code> (Conventional Commits) and <code>post-commit</code> (logs the commit into the
 CodeByIP dashboard feed). Google Fonts serves the three type families; youtube-nocookie.com serves the
@@ -32,8 +34,8 @@ five showreel embeds. That is the entire outside world the pages talk to — the
 no API, no runner, no launchd job and no GitHub Actions workflow for this repo. Two of Isaac's
 machine-level crontab entries do reach it from outside the tree: <code>product-audit.sh</code> reads its
 git log every Monday, and <code>uptime-sentinel.sh</code> polls the deployed site every 30 minutes.`,
-  weOwn: `Every byte the browser renders: five hand-written HTML pages, five stylesheets, two JS files
-(a 132-line motion layer and the 1,645-line canvas game), the achievement engine inlined in
+  weOwn: `Every byte the browser renders: eight hand-written HTML pages plus a 404, five stylesheets, two JS files
+(a 132-line motion layer and the ~1,700-line canvas game), the achievement engine inlined in
 index.html, the theme system, the image and document assets, and the discovery surface
 (sitemap.xml, robots.txt, canonicals, Open Graph, one JSON-LD block).`,
   filesystem: `IsaacPerez.co/
@@ -49,13 +51,18 @@ index.html, the theme system, the image and document assets, and the discovery s
     game.js             "Isaac's Studio" canvas game (50 entities, 23 exhibits)
   photo/
     index.html          CapturedByIP work + 5 YouTube embeds + JSON-LD
-    pricing/index.html  four packages, add-ons, booking
+    pricing/index.html  four packages, add-ons, booking + Offer JSON-LD
+  shootsort/index.html  the macOS card organizer — download + how it files
   roommate/
     privacy/index.html  Quarters privacy policy
     terms/index.html    Quarters terms
+    support/index.html  Quarters support — summary + link to the canonical page
+  souvenir/
+    privacy/index.html  Souvenir privacy policy (rendered from Souvenir/docs/privacy.md)
+  404.html              styled not-found, served by Vercel for any bad URL
   images/               5 app icons (curbside, runsbyip, kangskuisine, quarters, teamup)
   isaac.JPG  Resume.pdf  favicon.svg  ndLogo.webp  tinderLogo.png
-  sitemap.xml  robots.txt  CLAUDE.md
+  sitemap.xml  robots.txt  vercel.json  CLAUDE.md
   .vercel/              gitignored — project prj_sSFEIZN5xWUB25tlxb7MxXUADcmZ`,
 };
 
@@ -63,9 +70,9 @@ export const DECISIONS = [
   { axis: 'Runtime', decision: 'Vanilla HTML/CSS/JS, one IIFE per file. No package.json, no bundler, no framework, no node_modules — the repo tree IS the site.', adr: '—' },
   { axis: 'Hosting', decision: "Vercel's git integration on `main` is the entire pipeline; a push to main is a production deploy with no staging gate.", adr: '—' },
   { axis: 'Theme', decision: "`data-theme` on the root `html` element, persisted to `localStorage['theme']`, applied by an inline pre-paint IIFE in every page's `head` before the stylesheets.", adr: '—' },
-  { axis: 'Asset paths', decision: '`index.html` uses relative paths (`css/site.css`); every nested page uses absolute paths (`/css/design-system.css`).', adr: '—' },
+  { axis: 'Asset paths', decision: '`index.html` uses relative paths (`css/site.css`); every nested page — and `404.html`, which is served for a bad URL at any depth — uses absolute paths (`/css/design-system.css`).', adr: '—' },
   { axis: 'Motion', decision: 'Every animation branches on a `REDUCED` flag (`site.js:7`, `game.js:19`) or a `prefers-reduced-motion` media query.', adr: '—' },
-  { axis: 'Legal URLs', decision: '`/roommate/privacy/` and `/roommate/terms/` are permanent — App Store metadata points at them; the app renamed RoommateApp → Crib → Quarters, the path did not.', adr: '—' },
+  { axis: 'Legal URLs', decision: '`/roommate/privacy/` and `/roommate/terms/` are permanent — App Store metadata points at them; the app renamed RoommateApp → Crib → Quarters, the path did not. `/roommate/support/` and `/souvenir/privacy/` joined them on 2026-09-02.', adr: '—' },
   { axis: 'Photo brand', decision: 'capturedbyip.com folded into `/photo/` and `/photo/pricing/` (commit 9ab8851, 2026-08-08); the CBIP theme was dropped and both pages rebuilt on this site\'s own tokens.', adr: '—' },
   { axis: 'Commits', decision: 'Conventional Commits enforced by the fleet `commit-msg` hook — `core.hooksPath` points at `~/Coding/platform/scripts/hooks`, shared with the other 11 fleet repos.', adr: '—' },
 ];
@@ -85,7 +92,7 @@ export const NODES = [
     gx: 0.5, gy: 8, w: 2.5, d: 2.5, h: 40, kind: 'screen',
     one: 'The front door at isaacperez.co — who Isaac is, what he has built, and how to reach him.',
     what: 'One long scrolling page: hero, a one-line statement, seven work cards, the photo-and-video section, a skills marquee, two jobs, an about block with the real photo, and a contact row. A button in the footer opens the playable office over the top of it.',
-    how: '<code>index.html</code>, 408 lines, hand-written. Sections are <code>&lt;section class="sec-pad" id="..."&gt;</code> anchored to the nav (<code>#work</code>, <code>#experience</code>, <code>#about</code>, <code>#contact</code>). It links <code>css/site.css</code> and <code>css/game.css</code> relatively, then loads <code>js/site.js</code> and <code>js/game.js</code> with <code>defer</code>. Two scripts are inlined in the page itself: the theme pre-paint IIFE in <code>&lt;head&gt;</code> and the achievement engine before the closing body tag. <mark>Everything is one file</mark> — there is no template, include, or partial.',
+    how: '<code>index.html</code>, 427 lines, hand-written. Sections are <code>&lt;section class="sec-pad" id="..."&gt;</code> anchored to the nav (<code>#work</code>, <code>#experience</code>, <code>#about</code>, <code>#contact</code>). It links <code>css/site.css</code> and <code>css/game.css</code> relatively, then loads <code>js/site.js</code> and <code>js/game.js</code> with <code>defer</code>. Two scripts are inlined in the page itself: the theme pre-paint IIFE in <code>&lt;head&gt;</code> and the achievement engine before the closing body tag. <mark>Everything is one file</mark> — there is no template, include, or partial.',
     steps: [
       ['Pre-paint theme', 'The inline head IIFE reads localStorage["theme"] and stamps data-theme on the root html element before any stylesheet parses, so there is no flash.'],
       ['Paint', 'site.css and game.css load; the hero renders; the office overlay sits hidden behind #gameRoot.'],
@@ -117,7 +124,7 @@ export const NODES = [
     gx: 3.5, gy: 11, w: 2.5, d: 2, h: 36, kind: 'screen',
     one: 'What a shoot costs — four packages, written straight into the markup.',
     what: 'Sports Coverage from $300 (flagged "Most booked"), Real Estate Content from $250, Lifestyle & Brand from $400, Drone-Only from $200 — each with an includes list, and every one but Drone-Only with priced add-ons — then an always-included section, a common add-ons table, and a three-step booking explainer.',
-    how: '<code>photo/pricing/index.html</code>. Prices live in the HTML and nowhere else: the merge commit deliberately collapsed the old two-source setup (markup plus a <code>PRICING_CONFIG</code> object) down to <mark>markup alone</mark>, values unchanged. Styling is <code>/css/site.css</code> + <code>/css/photo.css</code> (<code>.ph-price</code>, <code>.ph-addon</code>); the only script is <code>/js/site.js</code>.',
+    how: '<code>photo/pricing/index.html</code>. Prices live in the HTML and, since 2026-09-02, in the page\'s own <code>OfferCatalog</code> JSON-LD, which must be edited with them: the merge commit deliberately collapsed the old two-source setup (markup plus a <code>PRICING_CONFIG</code> object) down to <mark>markup alone</mark>, values unchanged. Styling is <code>/css/site.css</code> + <code>/css/photo.css</code> (<code>.ph-price</code>, <code>.ph-addon</code>); the only script is <code>/js/site.js</code>.',
     steps: [
       ['Serve', 'Vercel returns photo/pricing/index.html at /photo/pricing/.'],
       ['Render packages', 'Four <article class="ph-price"> cards in .ph-price-grid, the first flagged .ph-price--featured.'],
@@ -125,17 +132,33 @@ export const NODES = [
       ['Close', 'The three .ph-step cards in #booking and the contact block send the visitor back to /#contact.'],
     ],
     cond: [
-      { q: 'The pricing page ships no JSON-LD while <code>/photo/</code> does — four priced packages are invisible to search as <code>Offer</code>/<code>PriceSpecification</code>. Intentional, or an oversight from the merge?' },
+      { q: 'The pricing page ships no JSON-LD while <code>/photo/</code> does — four priced packages are invisible to search as <code>Offer</code>/<code>PriceSpecification</code>. Intentional, or an oversight from the merge?', r: 'An oversight, now closed. The page carries an <code>OfferCatalog</code> with four <code>Offer</code> entries, each with a <code>PriceSpecification</code> <code>minPrice</code> (the cards say "From", so minPrice rather than price), hung off the existing service by <code>"provider": { "@id": ".../photo/#business" }</code> so the two blocks describe one business. Prices live in the markup AND in the block — keep them in step (2026-09-02).' },
     ],
   },
   {
-    id: 'Q', code: 'Q', name: 'Quarters legal pages', short: 'QUARTERS LEGAL', group: 'pages',
-    gx: 0.5, gy: 5, w: 2.5, d: 2, h: 34, kind: 'screen',
-    one: 'The privacy policy and terms the App Store listing for the Quarters iOS app points at.',
-    what: 'Two plain documents, last updated May 4 2026. The privacy page names exactly what the app collects (Sign in with Apple identifier, chore-proof photos, chat messages, push tokens) and where it lives (Supabase Postgres and storage in AWS us-west-1). The terms page covers households, owners, bills and termination.',
-    how: '<code>roommate/privacy/index.html</code> and <code>roommate/terms/index.html</code>. They are the only pages on <code>/css/design-system.css</code> — a different token set (<code>--color-accent: #0071e3</code>, <code>--space-*</code>) from the rest of the site — plus a page-local <code>&lt;style&gt;</code> block for <code>.legal-container</code>. Absolute asset paths, canonical links to their exact URLs, no JS beyond the theme pre-paint IIFE. <mark>The path is permanent</mark>: the app renamed RoommateApp → Crib → Quarters and <code>/roommate/</code> stayed.',
+    id: 'D', code: 'D', name: 'ShootSort page', short: 'SHOOTSORT', group: 'pages',
+    gx: 0.5, gy: 14, w: 2.5, d: 2, h: 32, kind: 'screen',
+    one: 'The download page for the macOS card organizer — the one work card that used to link nowhere.',
+    what: 'A hero with the download button, the promise the whole app rests on ("it never touches the card"), the folder shape a shoot lands in, and three capability points. The landing page\'s ShootSort card now points here.',
+    how: '<code>shootsort/index.html</code>, served at <code>/shootsort/</code>. Absolute asset paths: <code>/css/site.css</code> plus a page-scoped <code>&lt;style&gt;</code> block (no new stylesheet for one page), and <code>/js/site.js</code> for the shared reveals and theme toggle. The download points at the <mark>public mirror</mark>, <code>github.com/IsaacAPerez/ShootSort-releases/releases/latest/download/ShootSort.zip</code> — the source repo <code>IsaacAPerez/ShootSort</code> is private and its own README link 404s anonymously. There are no screenshots because ShootSort ships no product imagery in-tree.',
     steps: [
-      ['Serve', 'Vercel returns the directory index for /roommate/privacy/ or /roommate/terms/.'],
+      ['Serve', 'Vercel returns shootsort/index.html for the extensionless /shootsort/ URL.'],
+      ['Style', 'site.css supplies the tokens; the page block adds the promise card, the tree and the three-cell grid.'],
+      ['Download', 'The hero and closing buttons hit the ShootSort-releases "latest" redirect, so a new release needs no edit here.'],
+      ['Hand back', 'Footer and CTA return to /, /#work and /#contact.'],
+    ],
+    cond: [
+      { q: 'The page claims Apple silicon + macOS 14 and a notarized build, taken from <code>dist/appcast.xml</code> and the README. Nothing re-checks that when ShootSort ships a release — should the requirements line be generated, or is a page that only changes when the app\'s floor changes fine as prose?' },
+    ],
+  },
+  {
+    id: 'Q', code: 'Q', name: 'App-facing legal pages', short: 'APP LEGAL', group: 'pages',
+    gx: 0.5, gy: 5, w: 2.5, d: 2, h: 34, kind: 'screen',
+    one: 'The privacy, terms and support pages two iOS apps point their App Store listings at.',
+    what: 'Four plain documents. For Quarters: a privacy page (last updated May 4 2026) naming exactly what the app collects (Sign in with Apple identifier, chore-proof photos, chat messages, push tokens) and where it lives (Supabase Postgres and storage in AWS us-west-1), a terms page covering households, owners, bills and termination, and a support page. For Souvenir: a privacy page that accounts, field by field, for the one photograph per place that leaves the device when a book is pressed.',
+    how: '<code>roommate/{privacy,terms,support}/index.html</code> and <code>souvenir/privacy/index.html</code>. They are the only pages on <code>/css/design-system.css</code> — a different token set (<code>--color-accent: #0071e3</code>, <code>--space-*</code>) from the rest of the site — plus a page-local <code>&lt;style&gt;</code> block for <code>.legal-container</code> (Souvenir\'s extends it with table, <code>&lt;pre&gt;</code> and <code>h3</code> rules). Absolute asset paths, canonical links to their exact URLs, no JS beyond the theme pre-paint IIFE. <mark>The path is permanent</mark>: the app renamed RoommateApp → Crib → Quarters and <code>/roommate/</code> stayed. Two of the four are renderings, not originals: <code>/souvenir/privacy/</code> comes from <code>~/Coding/Souvenir/docs/privacy.md</code>, and <code>/roommate/support/</code> deliberately summarises and links to <code>thequarters.app/support</code> (the URL App Store Connect actually declares) rather than forking that FAQ.',
+    steps: [
+      ['Serve', 'Vercel returns the directory index for /roommate/privacy/, /roommate/terms/, /roommate/support/ or /souvenir/privacy/.'],
       ['Style', 'design-system.css provides the tokens; a page-local style block lays out the legal container.'],
       ['Read', 'Static prose — collection, use, storage, choices, children, changes, contact.'],
       ['Exit', 'One footer link back to isaacperez.co.'],
@@ -151,7 +174,7 @@ export const NODES = [
     gx: 6.5, gy: 6.5, w: 3, d: 3, h: 62, kind: 'tall',
     one: 'A walkable pixel home office layered over the landing page, where the furniture is the portfolio.',
     what: 'Press "Explore my office" and a canvas takes the screen. You walk with WASD or a thumbstick, press E next to anything, and a typewriter dialog opens: the phones on the console are the shipped apps, the framed prints are the jobs, the shelf gadgets are the skills, the printer hands you the résumé. A Roomba wanders, a cat follows you, a drone unlocks, and a mini-fridge hides a taco.',
-    how: 'One IIFE in <code>js/game.js</code>, 1,645 lines, no dependencies. A 40×26 tile map is built into a <code>Uint8Array</code> by <code>buildMap()</code>, then <code>bakeAtlas()</code>/<code>bakeWorld()</code> paint the whole room once into offscreen canvases; the frame loop only blits. <code>ENTITIES</code> is a 50-item array — 23 of them <code>core: true</code>, which is what the progress bar counts. A fixed-step loop (<code>STEP = 1/60</code>) drives <code>update()</code> and <code>render()</code>; audio is a tiny <mark>oscillator synth</mark> created on first gesture. <code>window.__ipGame</code> exposes <code>step</code>, <code>tp</code>, <code>inspect</code> and a <code>snapshot</code> getter for QA.',
+    how: 'One IIFE in <code>js/game.js</code>, 1,700 lines, no dependencies. A 40×26 tile map is built into a <code>Uint8Array</code> by <code>buildMap()</code>, then <code>bakeAtlas()</code>/<code>bakeWorld()</code> paint the whole room once into offscreen canvases; the frame loop only blits. <code>ENTITIES</code> is a 50-item array — 23 of them <code>core: true</code>, which is what the progress bar counts. A fixed-step loop (<code>STEP = 1/60</code>) drives <code>update()</code> and <code>render()</code>; audio is a tiny <mark>oscillator synth</mark> created on first gesture. <code>window.__ipGame</code> exposes <code>step</code>, <code>tp</code>, <code>inspect</code> and a <code>snapshot</code> getter for QA.',
     steps: [
       ['Boot', 'At load: buildMap() writes the tile grid, rebuildArt() reads the palette and bakes the atlas, character rigs and the world canvas.'],
       ['Open', 'openOverlay() adds .active to #gameRoot and .game-active to the body element; the start screen offers Step Inside, Back to the site, or the résumé.'],
@@ -161,9 +184,9 @@ export const NODES = [
       ['Exit', 'ESC or the HUD ✕ cancels the rAF, clears held keys, closes the dialog and hands the page back to the site.'],
     ],
     cond: [
-      { q: 'The 🏆 HUD button exits the office and calls <code>scrollIntoView</code> on <code>#achievements</code> — but no element with that id exists anywhere in the repo, so it silently falls back to <code>window.scrollTo(0, 0)</code>. Add an achievements section to the landing page, or make the button just close the office?' },
-      { q: 'Three guards skip an entity id <code>shrine_taco</code> that no longer exists in <code>ENTITIES</code>, while <code>wall_cracked</code> (the mini-fridge) is filtered out once <code>state.vaultOpen</code> is true — so the fridge can only ever be opened once per browser and its <code>else sfx("blip")</code> branch is unreachable. Was a second secret meant to take its place?' },
-      { q: '<code>sessionStorage["ip-game-skip"]</code> is written on every exit and cleared on re-entry but is never read anywhere — a leftover from when the office was the landing experience instead of an opt-in. Remove it, or wire it back up?' },
+      { q: 'The 🏆 HUD button exits the office and calls <code>scrollIntoView</code> on <code>#achievements</code> — but no element with that id exists anywhere in the repo, so it silently falls back to <code>window.scrollTo(0, 0)</code>. Add an achievements section to the landing page, or make the button just close the office?', r: 'Neither — the badges now render <em>inside</em> the office. <code>openAchievements()</code> fills the existing <code>#gameDialog</code> with all nine badges, locked and unlocked, headed "N / 8 unlocked"; the visitor never leaves the room. The badge table comes from <code>window.__ipAch</code>, published by the achievement engine in index.html, with a fallback copy in game.js. No landing-page section was added — that would have grown an unmeasured surface (2026-09-02).' },
+      { q: 'Three guards skip an entity id <code>shrine_taco</code> that no longer exists in <code>ENTITIES</code>, while <code>wall_cracked</code> (the mini-fridge) is filtered out once <code>state.vaultOpen</code> is true — so the fridge can only ever be opened once per browser and its <code>else sfx("blip")</code> branch is unreachable. Was a second secret meant to take its place?', r: 'The three dead <code>shrine_taco</code> guards are gone (2026-09-02); they protected an id with no definition, so they never matched. The mini-fridge behaviour was left exactly as it is — one opening per browser is the intended secret, and a second one is a design question for Isaac, not a cleanup.' },
+      { q: '<code>sessionStorage["ip-game-skip"]</code> is written on every exit and cleared on re-entry but is never read anywhere — a leftover from when the office was the landing experience instead of an opt-in. Remove it, or wire it back up?', r: 'Removed (2026-09-02). Nothing read it; the office is opt-in now, so there is no "skip" state worth remembering. <code>exitGame()</code> just tears the overlay down and <code>#playGameBtn</code> calls <code>openOverlay</code> directly.' },
     ],
   },
   {
@@ -201,14 +224,15 @@ export const NODES = [
   {
     id: 'A', code: 'A', name: 'Achievements', short: 'ACHIEVEMENTS', group: 'runtime',
     gx: 6.5, gy: 3.5, w: 2.5, d: 2, h: 34, kind: 'box',
-    one: 'Eight badges that pop as a visitor explores, plus a hidden cheat code that does not count toward the total.',
+    one: 'Eight badges that pop as a visitor explores — readable any time from the HUD — plus a hidden cheat code that does not count toward the total.',
     what: 'Read the app phones, the framed jobs, the shelf, the contact console — each group pops a toast the first time. Toggling the theme counts. Touring every exhibit fires confetti and a fanfare. And the old arrow-arrow-B-A cheat code still does something. "Stepped Inside" lands the moment the office opens, so the HUD counter can reach 8 of 8.',
-    how: 'An inline IIFE at the bottom of <code>index.html</code>, not a file. It owns a nine-entry table (emoji + label), reads and writes <code>localStorage["ip-achievements"]</code>, and publishes <code>window.unlock(id)</code>, which builds a <code>.toast</code> node into <code>#toastStack</code> and removes it after 4.6s. <code>js/game.js</code> calls it through <code>gUnlock()</code> from <code>markVisited()</code>, mapping <code>e.group</code> (<code>project</code>, <code>crystal</code>, <code>study</code>, <code>contact</code>, <code>statue</code>) to a badge, and from <code>openOverlay()</code> for <code>adventurer</code>, while <code>index.html</code> itself unlocks only <code>shifter</code> and <code>konami</code> — eight countable ids plus <code>konami</code>. <code>syncAchCount()</code> filters <code>konami</code> out and renders <mark>n/8</mark>, a counter that now tops out at a real 8/8. A second Konami listener lives here on <code>window</code>, in parallel with the game\'s own — <code>unlock()</code> de-dupes.',
+    how: 'An inline IIFE at the bottom of <code>index.html</code>, not a file. It owns a nine-entry table (emoji + label), reads and writes <code>localStorage["ip-achievements"]</code>, and publishes <code>window.unlock(id)</code>, which builds a <code>.toast</code> node into <code>#toastStack</code> and removes it after 4.6s. <code>js/game.js</code> calls it through <code>gUnlock()</code> from <code>markVisited()</code>, mapping <code>e.group</code> (<code>project</code>, <code>crystal</code>, <code>study</code>, <code>contact</code>, <code>statue</code>) to a badge, and from <code>openOverlay()</code> for <code>adventurer</code>, while <code>index.html</code> itself unlocks only <code>shifter</code> and <code>konami</code> — eight countable ids plus <code>konami</code>. <code>syncAchCount()</code> filters <code>konami</code> out and renders <mark>n/8</mark>, a counter that now tops out at a real 8/8. A second Konami listener lives here on <code>window</code>, in parallel with the game\'s own — <code>unlock()</code> de-dupes. The table is also published as <code>window.__ipAch</code> so the game\'s 🏆 panel can render it.',
     steps: [
       ['Rehydrate', 'Parse localStorage["ip-achievements"] into a Set inside a try/catch.'],
       ['Publish', 'Expose window.unlock(id) so the game (and the theme button) can call it without importing anything.'],
       ['Award', 'On a new id: add, persist, and append a toast to #toastStack.'],
       ['Count', 'game.js syncAchCount() re-reads the store, drops konami, and writes "n/8" into the HUD — 8/8 is the ceiling.'],
+      ['Review', 'The 🏆 HUD button calls openAchievements(), which renders the whole table into #gameDialog — unlocked badges lit, the rest under a lock, konami flagged as a bonus — without leaving the office.'],
       ['Complete', 'When all 23 core exhibits are visited the game unlocks completionist, bursts particles and plays the fanfare — once, guarded by state.confetti.'],
     ],
     cond: [
@@ -220,7 +244,7 @@ export const NODES = [
     gx: 7, gy: 10.5, w: 3, d: 2.5, h: 24, kind: 'store',
     one: 'The only database this site has: three keys in the visitor\'s own browser.',
     what: 'The site remembers your theme, which badges you have earned, and how far you got in the office — nothing leaves the machine, and there is no account, no server and no analytics anywhere on the site.',
-    how: '<code>localStorage["theme"]</code> (<code>"light"</code>/<code>"dark"</code>), <code>localStorage["ip-achievements"]</code> (a JSON array of badge ids) and <code>localStorage["ip-game-state"]</code> — the object built by <code>loadState()</code>: <code>visited[]</code>, <code>vaultOpen</code>, <code>vaultFound</code>, <code>chestOpened</code>, <code>drone</code>, <code>muted</code>, <code>confetti</code>. Plus <code>sessionStorage["ip-game-skip"]</code>, which is still written. Every read and write in <code>js/site.js</code>, <code>js/game.js</code> and the inline achievement engine is wrapped in <code>try/catch</code> for <mark>Safari private mode</mark>; only the pre-paint theme reads are bare, by rule.',
+    how: '<code>localStorage["theme"]</code> (<code>"light"</code>/<code>"dark"</code>), <code>localStorage["ip-achievements"]</code> (a JSON array of badge ids) and <code>localStorage["ip-game-state"]</code> — the object built by <code>loadState()</code>: <code>visited[]</code>, <code>vaultOpen</code>, <code>vaultFound</code>, <code>chestOpened</code>, <code>drone</code>, <code>muted</code>, <code>confetti</code>. (<code>sessionStorage["ip-game-skip"]</code> was removed on 2026-09-02 — nothing ever read it.) Every read and write in <code>js/site.js</code>, <code>js/game.js</code> and the inline achievement engine is wrapped in <code>try/catch</code> for <mark>Safari private mode</mark>; only the pre-paint theme reads are bare, by rule.',
     steps: [
       ['Read at boot', 'The head IIFE reads theme; game.js loadState() merges the saved object over defaults; the achievement engine parses its array.'],
       ['Write on change', 'Theme on toggle, ip-achievements on each new badge, ip-game-state on visit / fridge / drone / mute / confetti.'],
@@ -235,13 +259,14 @@ export const NODES = [
     id: 'C', code: 'C', name: 'Stylesheets', short: 'STYLESHEETS', group: 'assets',
     gx: 10.5, gy: 8, w: 2.5, d: 2, h: 34, kind: 'cards',
     one: 'Four live stylesheets, each owning exactly one kind of page — and one that owns nothing.',
-    what: 'The landing page, the office overlay, the photo pages and the legal pages each have their own sheet. They are never mixed: picking the wrong one is how a page ends up looking like a different site.',
-    how: '<code>css/site.css</code> (386 lines) is the landing page and the token source — <code>:root</code>, <code>:root[data-theme="dark"]</code>, and a <code>prefers-color-scheme</code> block. <code>css/game.css</code> (543) is the overlay and deliberately declares <mark>its own tokens</mark> on <code>#gameRoot, .toast-stack</code> so it never depends on the site sheet. <code>css/photo.css</code> (206) layers <code>.ph-*</code> classes on top of site.css and is loaded only by the two <code>/photo/</code> pages. <code>css/design-system.css</code> (1,328) is a separate token system used only by the two <code>/roommate/</code> legal pages. <code>css/rpg.css</code> is loaded by nothing.',
+    what: 'The landing page, the office overlay, the photo pages and the legal pages each have their own sheet. They are never mixed: picking the wrong one is how a page ends up looking like a different site. A one-off page keeps its handful of extra rules in a page-scoped style block instead of widening a shared sheet.',
+    how: '<code>css/site.css</code> (386 lines) is the landing page and the token source — <code>:root</code>, <code>:root[data-theme="dark"]</code>, and a <code>prefers-color-scheme</code> block. <code>css/game.css</code> (543) is the overlay and deliberately declares <mark>its own tokens</mark> on <code>#gameRoot, .toast-stack</code> so it never depends on the site sheet. <code>css/photo.css</code> (206) layers <code>.ph-*</code> classes on top of site.css and is loaded only by the two <code>/photo/</code> pages. <code>css/design-system.css</code> (1,328) is a separate token system used only by the four legal-style pages (<code>/roommate/{privacy,terms,support}/</code>, <code>/souvenir/privacy/</code>). <code>/shootsort/</code> and <code>404.html</code> ride on site.css plus a page-scoped <code>&lt;style&gt;</code> block. <code>css/rpg.css</code> is loaded by nothing.',
     steps: [
       ['site.css', 'Tokens, nav, hero, work cards, experience, about, contact, footer — plus the reduced-motion block.'],
       ['game.css', 'Overlay chrome: start screen, HUD, dialog, joystick, toast stack, with its own light/dark tokens.'],
       ['photo.css', 'Hero stats, service grid, embed frames, price cards — additive over site.css tokens.'],
       ['design-system.css', 'A full independent token set (--color-*, --space-*, --text-*) for the legal pages only.'],
+      ['page-scoped <style>', 'The legal pages, /shootsort/ and 404.html each carry their own block — one page, a handful of rules, no shared sheet widened.'],
     ],
     cond: [],
   },
@@ -264,7 +289,7 @@ export const NODES = [
     gx: 13.5, gy: 8, w: 3, d: 2, h: 30, kind: 'slab',
     one: 'The only two outside services the pages actually call: Google Fonts and YouTube.',
     what: 'Type comes from Google Fonts on the three marketing pages; the two legal pages call nobody and fall back to a system font stack. The five showreels on the photo page are YouTube players in privacy-enhanced mode. That is the complete list of external requests — no analytics, no tag manager, no CDN scripts.',
-    how: 'One <code>&lt;link&gt;</code> to <code>fonts.googleapis.com/css2</code> for Space Grotesk, Inter and JetBrains Mono, preceded by two <code>preconnect</code> hints, on <code>index.html</code>, <code>photo/index.html</code> and <code>photo/pricing/index.html</code> — and on those three only. <code>roommate/privacy/index.html</code> and <code>roommate/terms/index.html</code> carry no font link and no preconnect at all; they resolve type through <code>--font-sans</code> in <code>css/design-system.css</code>, an <code>-apple-system</code> stack. The showreels are five <code>&lt;iframe src="https://www.youtube-nocookie.com/embed/&lt;id&gt;"&gt;</code> with <code>loading="lazy"</code> inside <code>.ph-work-item</code>. CLAUDE.md holds the line: no new external dependency beyond <mark>the existing Google Fonts links</mark> without a conversation.',
+    how: 'One <code>&lt;link&gt;</code> to <code>fonts.googleapis.com/css2</code> for Space Grotesk, Inter and JetBrains Mono, preceded by two <code>preconnect</code> hints, on <code>index.html</code>, <code>photo/index.html</code> and <code>photo/pricing/index.html</code> — and on those three only. <code>roommate/privacy/index.html</code> and <code>roommate/terms/index.html</code> carry no font link and no preconnect at all; they resolve type through <code>--font-sans</code> in <code>css/design-system.css</code>, an <code>-apple-system</code> stack. The showreels are five <code>&lt;iframe src="https://www.youtube-nocookie.com/embed/&lt;id&gt;"&gt;</code> with <code>loading="lazy"</code> inside <code>.ph-work-item</code>. CLAUDE.md holds the line: no new external dependency beyond <mark>the existing Google Fonts links</mark> without a conversation — and since 2026-09-02 the <code>vercel.json</code> CSP enforces exactly that list: <code>fonts.googleapis.com</code> for styles, <code>fonts.gstatic.com</code> for faces, <code>www.youtube-nocookie.com</code> for frames, <code>\'self\'</code> for everything else. A new origin now needs a header change as well as a conversation.',
     steps: [
       ['Preconnect', 'index.html, /photo/ and /photo/pricing/ each open early connections to fonts.googleapis.com and fonts.gstatic.com; the two legal pages open none.'],
       ['Fetch faces', 'One css2 request per marketing page pulls three families; every rule falls back to -apple-system / system-ui — which is all the legal pages ever use.'],
@@ -297,7 +322,7 @@ export const NODES = [
     gx: 10.5, gy: 0.5, w: 3, d: 2.5, h: 28, kind: 'slab',
     one: 'The host: it watches main, and whatever is in the tree becomes the live site.',
     what: 'There is no build. Vercel clones the repo, serves the files as they are, gives each directory an extensionless URL, and terminates TLS on the apex domain. Pushing to main is publishing.',
-    how: 'Vercel project <code>isaacperez</code>, id <code>prj_sSFEIZN5xWUB25tlxb7MxXUADcmZ</code>, org <code>team_kglkY3kYg639waIJAEOnAyuQ</code>, root directory <code>.</code> — recorded in the gitignored <code>.vercel/repo.json</code>, linked to GitHub <code>IsaacAPerez/IsaacPerez.co</code>. The repo carries <mark>no vercel.json</mark>: no build command, no rewrites, no redirects, no custom headers. The CLI at <code>/opt/homebrew/bin/vercel</code> exists for a manual <code>vercel --prod</code>, but that path is discouraged — <code>git push origin main</code> is the deploy, and there is no staging gate in front of it.',
+    how: 'Vercel project <code>isaacperez</code>, id <code>prj_sSFEIZN5xWUB25tlxb7MxXUADcmZ</code>, org <code>team_kglkY3kYg639waIJAEOnAyuQ</code>, root directory <code>.</code> — recorded in the gitignored <code>.vercel/repo.json</code>, linked to GitHub <code>IsaacAPerez/IsaacPerez.co</code>. The repo carries a <code>vercel.json</code> with <mark>headers only</mark> — no build command, no rewrites, no redirects: CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy and Permissions-Policy on <code>/(.*)</code> (added 2026-09-02). The CLI at <code>/opt/homebrew/bin/vercel</code> exists for a manual <code>vercel --prod</code>, but that path is discouraged — <code>git push origin main</code> is the deploy, and there is no staging gate in front of it.',
     steps: [
       ['Push', 'git push origin main.'],
       ['Build', 'Nothing to build — Vercel takes the tree as the output directory.'],
@@ -306,15 +331,15 @@ export const NODES = [
       ['Verify', 'curl -s https://isaacperez.co | grep <changed-text> — the whole post-deploy check.'],
     ],
     cond: [
-      { q: 'Nothing in the repo redirects the retired <code>capturedbyip.com</code> to <code>/photo/</code> — there is no <code>vercel.json</code> at all. Is that handled in the Vercel dashboard or at DNS, and does it need writing down somewhere in-tree?' },
+      { q: 'Nothing in this repo redirects the retired <code>capturedbyip.com</code> to <code>/photo/</code>. Is that handled in the Vercel dashboard or at DNS, and does it need writing down somewhere in-tree?', r: 'It lives in the OTHER repo: <code>~/Coding/CapturedByIP/vercel.json</code> redirects <code>/(.*)</code> → <code>https://isaacperez.co/photo/</code> (301, commits 84c3fc5 / 6561464, 2026-08-08), so that project is now a redirect-only stub. Nothing to add here beyond this note; this repo\'s own vercel.json carries response headers only (2026-09-02).' },
     ],
   },
   {
     id: 'O', code: 'O', name: 'Discovery surface', short: 'DISCOVERY', group: 'ship',
     gx: 14, gy: 4, w: 2.5, d: 2, h: 34, kind: 'box',
-    one: 'How search engines and link previews see the site — five URLs, five canonicals, one rich card.',
+    one: 'How search engines and link previews see the site — eight URLs, eight canonicals, two rich cards.',
     what: 'A sitemap listing every public URL, a fully-open robots file, a canonical link on every page, Open Graph and Twitter cards for the shareable pages, and one structured-data block describing the photo practice.',
-    how: '<code>sitemap.xml</code> holds five <code>&lt;loc&gt;</code> entries: <code>/</code> (1.0), <code>/photo/</code> (0.8), <code>/photo/pricing/</code> (0.7), <code>/roommate/privacy/</code> and <code>/roommate/terms/</code> (0.3). <code>robots.txt</code> is <code>Allow: /</code> plus the sitemap pointer. Every page carries a <code>&lt;link rel="canonical"&gt;</code> to its exact <code>https://isaacperez.co/</code> production URL; <code>index.html</code> and both <code>/photo/</code> pages add <code>og:*</code> and <code>twitter:*</code> tags pointing at <code>isaac.JPG</code>. The only JSON-LD is the <code>ProfessionalService</code> block on <code>/photo/</code>. The standing rule: <mark>sitemap and canonical move in the same commit</mark> as any page add or remove.',
+    how: '<code>sitemap.xml</code> holds eight <code>&lt;loc&gt;</code> entries: <code>/</code> (1.0), <code>/photo/</code> (0.8), <code>/photo/pricing/</code> (0.7), <code>/shootsort/</code> (0.6), <code>/souvenir/privacy/</code>, <code>/roommate/privacy/</code>, <code>/roommate/terms/</code> and <code>/roommate/support/</code> (0.3). <code>404.html</code> is deliberately absent and carries <code>robots: noindex</code>. <code>robots.txt</code> is <code>Allow: /</code> plus the sitemap pointer. Every page carries a <code>&lt;link rel="canonical"&gt;</code> to its exact <code>https://isaacperez.co/</code> production URL; <code>index.html</code> and both <code>/photo/</code> pages add <code>og:*</code> and <code>twitter:*</code> tags pointing at <code>isaac.JPG</code>. The JSON-LD is the <code>ProfessionalService</code> block on <code>/photo/</code> plus the <code>OfferCatalog</code> on <code>/photo/pricing/</code> that hangs off it by <code>@id</code>. The standing rule: <mark>sitemap and canonical move in the same commit</mark> as any page add or remove.',
     steps: [
       ['Add a page', 'New page lands at <path>/index.html with an absolute-path stylesheet link.'],
       ['Canonicalize', 'It gets a canonical link tag pointing at its exact production URL.'],
@@ -322,7 +347,7 @@ export const NODES = [
       ['Check', 'Grepping the loc entries out of sitemap.xml is the audit — they should match the set of real directories.'],
     ],
     cond: [
-      { q: 'CLAUDE.md still says the sitemap holds "currently exactly <code>/</code>, <code>/roommate/privacy/</code>, <code>/roommate/terms/</code>", but it has held five URLs since the <code>/photo/</code> merge on 2026-08-08. The operating manual needs that line refreshed — should it name the URLs at all, or just point at the grep?' },
+      { q: 'CLAUDE.md still says the sitemap holds "currently exactly <code>/</code>, <code>/roommate/privacy/</code>, <code>/roommate/terms/</code>", but it has held five URLs since the <code>/photo/</code> merge on 2026-08-08. The operating manual needs that line refreshed — should it name the URLs at all, or just point at the grep?', r: 'Just the grep. CLAUDE.md now says the grep IS the list and refuses to hard-code it, precisely because the list drifted twice (3 → 5 → 8). The same commit refreshed the stale line count and the CSS-role line that never mentioned photo.css (2026-09-02).' },
     ],
   },
 
@@ -372,8 +397,9 @@ export const FLOWS = [
       ['H', 'V', 'git push origin main', { subject: 'fix(photo): tighten the pricing copy', hook: 'commit-msg ok' }, 'yx'],
       ['V', 'L', 'deploy /', { url: 'https://isaacperez.co/' }, 'xy'],
       ['V', 'P', 'deploy /photo/', { url: 'https://isaacperez.co/photo/' }, 'xy'],
-      ['V', 'Q', 'deploy /roommate/*', { urls: ['/roommate/privacy/', '/roommate/terms/'] }, 'xy'],
-      ['V', 'O', 'sitemap + robots live', { locs: 5, robots: 'Allow: /' }, 'yx'],
+      ['V', 'Q', 'deploy /roommate/*', { urls: ['/roommate/privacy/', '/roommate/terms/', '/roommate/support/'] }, 'xy'],
+      ['V', 'D', 'deploy /shootsort/', { url: 'https://isaacperez.co/shootsort/' }, 'xy'],
+      ['V', 'O', 'sitemap + robots live', { locs: 8, robots: 'Allow: /' }, 'yx'],
     ],
   },
 ];
@@ -412,7 +438,7 @@ export const CH = [
   {
     id: 'office', title: 'Step inside the office', reveal: ['G', 'A'],
     lede: `The one piece of real engineering: a walkable pixel studio where the furniture is the portfolio.`,
-    story: `<p><code>js/game.js</code> is 1,645 lines of dependency-free canvas — a 40×26 tile room baked once into offscreen canvases, 50 entities of which <mark>23 are exhibits you can read</mark>, and a fixed-step loop that only blits. The phones are the apps, the frames are the jobs, the printer hands you the résumé.</p><p>Reading a group of exhibits pops a badge from the achievement engine inlined in <code>index.html</code>, and both halves persist to the same browser storage.</p>`,
+    story: `<p><code>js/game.js</code> is ~1,700 lines of dependency-free canvas — a 40×26 tile room baked once into offscreen canvases, 50 entities of which <mark>23 are exhibits you can read</mark>, and a fixed-step loop that only blits. The phones are the apps, the frames are the jobs, the printer hands you the résumé.</p><p>Reading a group of exhibits pops a badge from the achievement engine inlined in <code>index.html</code>, and both halves persist to the same browser storage.</p>`,
     flow: [
       ['L', 'G', 'Explore my office', { trigger: '#playGameBtn' }],
       ['G', 'S', 'load ip-game-state', { key: 'ip-game-state' }],
@@ -433,9 +459,19 @@ export const CH = [
     ],
   },
   {
+    id: 'product', title: 'A page per product', reveal: ['D'],
+    lede: `Every work card should end somewhere. ShootSort was the one that did not.`,
+    story: `<p>The macOS card organizer had a card on the landing page with <mark>no link at all</mark> — nothing to read, nothing to download. <code>/shootsort/</code> is that ending: the promise the app rests on, the folder shape a shoot lands in, and a download that points at the public releases mirror rather than the private source repo.</p><p>It is also the cheapest possible page: site.css plus one page-scoped style block, no new stylesheet, no new dependency.</p>`,
+    flow: [
+      ['V', 'D', '200 /shootsort/', { url: '/shootsort/' }],
+      ['D', 'C', 'site.css + page <style>', { href: '/css/site.css' }],
+      ['D', 'O', 'canonical + sitemap loc', { priority: 0.6 }],
+    ],
+  },
+  {
     id: 'legal', title: 'The pages that cannot move', reveal: ['Q', 'H'],
-    lede: `Two legal documents the App Store points at, and the one gate every change has to pass.`,
-    story: `<p><code>/roommate/privacy/</code> and <code>/roommate/terms/</code> serve the Quarters iOS app. The app was renamed twice; <mark>the URL is permanent</mark>, because external systems point at it — only the copy inside gets updated.</p><p>Every commit in this repo goes through the fleet's shared hooks: Conventional Commits enforced by <code>commit-msg</code>, the commit logged to the CodeByIP feed by <code>post-commit</code>. That is the entire pipeline — there is no CI here at all.</p>`,
+    lede: `Four legal documents two App Store listings point at, and the one gate every change has to pass.`,
+    story: `<p><code>/roommate/{privacy,terms,support}/</code> serve the Quarters iOS app and <code>/souvenir/privacy/</code> serves Souvenir. Quarters was renamed twice; <mark>the URL is permanent</mark>, because external systems point at it — only the copy inside gets updated. Two of the four are renderings of a source that lives in the app's own repo, so they are re-rendered, never re-written.</p><p>Every commit in this repo goes through the fleet's shared hooks: Conventional Commits enforced by <code>commit-msg</code>, the commit logged to the CodeByIP feed by <code>post-commit</code>. That is the entire pipeline — there is no CI here at all.</p>`,
     flow: [
       ['H', 'V', 'git push origin main', { subject: 'fix(legal): rename Crib to Quarters', hook: 'commit-msg ok' }],
       ['V', 'Q', '200 /roommate/privacy/', { url: '/roommate/privacy/' }],
@@ -457,52 +493,61 @@ export const CH = [
   },
 ];
 
-export const HOW_HTML = `<div class="eyebrow">isaac-perez-co · static · Vercel</div><h1 class="t">How it's built</h1><div class="sub">five hand-written pages, two scripts, no build step</div>
+export const HOW_HTML = `<div class="eyebrow">isaac-perez-co · static · Vercel</div><h1 class="t">How it's built</h1><div class="sub">eight hand-written pages, two scripts, no build step</div>
 
 <h3 class="sec">The shape of it</h3>
 <p>IsaacPerez.co is the fleet's only pure-static product. There is no <code>package.json</code>, no bundler, no test suite and no CI: the repository tree is literally the website, and Vercel's git integration on <code>main</code> is the entire deployment pipeline. Everything a browser runs is hand-written vanilla HTML, CSS and JavaScript — one IIFE per file, <code>'use strict'</code> at the top.</p>
 
 <h3 class="sec">Filesystem</h3>
 <pre>IsaacPerez.co/
-  index.html               408 lines — landing page, inline theme pre-paint, inline achievements
+  index.html               427 lines — landing page, inline theme pre-paint, inline achievements
   css/
     site.css               386  landing page + the token source (:root / [data-theme])
     game.css               543  the office overlay, with its own tokens
     photo.css              206  /photo/ and /photo/pricing/ only
-    design-system.css     1328  /roommate/ legal pages only
+    design-system.css     1328  the four legal-style pages only
     rpg.css               1139  abandoned redesign — zero references
   js/
     site.js                132  reveals, parallax, nav, theme toggle, anchor scroll
-    game.js               1645  "Isaac's Studio" — 50 entities, 23 exhibits, 6 zones
+    game.js               1700  "Isaac's Studio" — 50 entities, 23 exhibits, 6 zones
   photo/index.html              CapturedByIP work + 5 YouTube embeds + JSON-LD
-  photo/pricing/index.html      4 packages, add-ons, booking
+  photo/pricing/index.html      4 packages, add-ons, booking + Offer JSON-LD
+  shootsort/index.html          the macOS card organizer — download + how it files
   roommate/privacy/index.html   Quarters privacy policy (App Store target)
   roommate/terms/index.html     Quarters terms (App Store target)
+  roommate/support/index.html   Quarters support — summary + link to thequarters.app/support
+  souvenir/privacy/index.html   Souvenir privacy policy (rendered from Souvenir/docs/privacy.md)
+  404.html                      styled not-found — Vercel serves it for any bad URL
   images/                       5 app icons
   isaac.JPG  Resume.pdf  favicon.svg  ndLogo.webp  tinderLogo.png
-  sitemap.xml  robots.txt  CLAUDE.md
+  sitemap.xml  robots.txt  vercel.json  CLAUDE.md
   .vercel/                      gitignored — the linked Vercel project
   docs/atlas/                   this atlas (data.mjs → atlas.html + SYSTEM.md)</pre>
 
 <h3 class="sec">What runs where</h3>
-<p><b>Production</b> — Vercel project <code>isaacperez</code> (<code>prj_sSFEIZN5xWUB25tlxb7MxXUADcmZ</code>, org <code>team_kglkY3kYg639waIJAEOnAyuQ</code>, root <code>.</code>), auto-deploying <code>main</code> from GitHub <code>IsaacAPerez/IsaacPerez.co</code> onto the apex <code>isaacperez.co</code>. No <code>vercel.json</code>, no build command, no rewrites.</p>
+<p><b>Production</b> — Vercel project <code>isaacperez</code> (<code>prj_sSFEIZN5xWUB25tlxb7MxXUADcmZ</code>, org <code>team_kglkY3kYg639waIJAEOnAyuQ</code>, root <code>.</code>), auto-deploying <code>main</code> from GitHub <code>IsaacAPerez/IsaacPerez.co</code> onto the apex <code>isaacperez.co</code>. No build command and no rewrites; the only <code>vercel.json</code> is a response-headers block (CSP, nosniff, X-Frame-Options, Referrer-Policy, Permissions-Policy) added 2026-09-02.</p>
 <p><b>CI</b> — none. There is no <code>.github/</code> directory in this repo and no self-hosted runner for it; the eight <code>actions.runner.IsaacAPerez-*</code> LaunchAgents on this Mac all belong to other products, and no launchd job runs this repo.</p>
 <p><b>Scheduled, from outside the tree</b> — two crontab entries on this Mac do target it, neither of them living in the repo. <code>20 6 * * 1 ~/.openclaw/scripts/product-audit.sh</code> carries <code>isaacperez=IsaacPerez.co</code> in its lead list and runs <code>git log</code> / <code>git status</code> over the working copy every Monday. <code>3,33 * * * * ~/scripts/uptime-sentinel.sh</code> polls <code>https://isaacperez.co</code> every 30 minutes against the exact <code>&lt;title&gt;</code> string <code>Isaac Perez — Builder &amp; Creator</code>, plus <code>https://capturedbyip.com</code> for the redirect into <code>/photo/</code>. Neither writes to the repo.</p>
 <p><b>Git hooks</b> — <code>core.hooksPath</code> → <code>~/Coding/platform/scripts/hooks</code> (shared fleet hooks): <code>commit-msg</code> enforces Conventional Commits in pure bash, <code>post-commit</code> logs the commit into the CodeByIP dashboard feed via <code>~/Coding/CodeByIP/Backend/luka-log.py</code>, <code>pre-commit</code> is the Swift lint and no-ops here.</p>
 <p><b>Local preview</b> — <code>python3 -m http.server 8000</code> from the repo root. Any static server works; there is nothing to compile.</p>
 <p><b>Roster</b> — <code>slug: isaac-perez-co</code>, <code>kind: web</code>, <code>type: static</code> in <code>~/Coding/platform/scripts/products.json</code>. Roster edits happen there, never in this repo.</p>
 
-<h3 class="sec">The five public URLs</h3>
-<pre>/                      index.html            priority 1.0
-/photo/                photo/index.html      priority 0.8
-/photo/pricing/        photo/pricing/index.html   priority 0.7
+<h3 class="sec">The eight public URLs</h3>
+<pre>/                      index.html                   priority 1.0
+/photo/                photo/index.html             priority 0.8
+/photo/pricing/        photo/pricing/index.html     priority 0.7
+/shootsort/            shootsort/index.html         priority 0.6
+/souvenir/privacy/     souvenir/privacy/index.html  priority 0.3  App Store target
 /roommate/privacy/     roommate/privacy/index.html  priority 0.3  App Store target
-/roommate/terms/       roommate/terms/index.html    priority 0.3  App Store target</pre>
+/roommate/terms/       roommate/terms/index.html    priority 0.3  App Store target
+/roommate/support/     roommate/support/index.html  priority 0.3
+404.html                                            not in the sitemap, robots noindex</pre>
 <p>Renaming or moving any of these is a stop-and-ask: external systems point at them, and the sitemap plus every canonical link must move in the same commit.</p>
 
 <h3 class="sec">Rules that bite</h3>
 <p><b>Filename case.</b> macOS is case-insensitive, Vercel is not — the hero photo really is <code>isaac.JPG</code>, and it is the <code>og:image</code>. Diff every <code>src</code>/<code>href</code> against <code>ls</code> before committing.</p>
-<p><b>Path style.</b> <code>index.html</code> uses relative paths; every nested page uses absolute <code>/css/*.css</code>. Pasting one style into the other kind of page works locally and breaks deployed.</p>
+<p><b>Path style.</b> <code>index.html</code> uses relative paths; every nested page — and <code>404.html</code>, which is served for a bad URL at any depth — uses absolute <code>/css/*.css</code>. Pasting one style into the other kind of page works locally and breaks deployed.</p>
 <p><b>Reduced motion.</b> Both scripts compute a <code>REDUCED</code> flag (<code>site.js:7</code>, <code>game.js:19</code>) and branch on it everywhere; new motion must too.</p>
 <p><b>The pre-paint script stays inline.</b> The theme IIFE in each <code>&lt;head&gt;</code> exists to prevent a flash of the wrong theme — never externalize or defer it.</p>
-<p><b>No tooling.</b> No package.json, no bundler, no framework, no analytics, no workflows. Adding any of them is an architecture change, not a cleanup.</p>`;
+<p><b>No tooling.</b> No package.json, no bundler, no framework, no analytics, no workflows. Adding any of them is an architecture change, not a cleanup.</p>
+<p><b>The CSP is load-bearing.</b> <code>vercel.json</code> allows exactly <code>'self'</code>, <code>fonts.googleapis.com</code>, <code>fonts.gstatic.com</code> and <code>www.youtube-nocookie.com</code>. A new origin, or moving an inline script to a nonce, breaks every page at once — test header changes against a local server that replays them before pushing.</p>`;
