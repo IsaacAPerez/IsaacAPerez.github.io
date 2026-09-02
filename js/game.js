@@ -768,10 +768,21 @@
       a.className = 'btn btn-gold';
       a.href = e.link;
       // Internal hash links go back to the page itself — a new tab for that is wrong.
-      const internal = e.link.startsWith('mailto:') || e.link.startsWith('#') || e.link.startsWith('/#');
+      const hashLink = e.link.startsWith('#') || e.link.startsWith('/#');
+      const internal = hashLink || e.link.startsWith('mailto:');
       if (!internal) { a.target = '_blank'; a.rel = 'noopener'; }
       a.textContent = e.linkLabel || 'Open';
       a.addEventListener('click', () => { if (e.group === 'contact') gUnlock('raven'); });
+      // A hash link only moves the page BEHIND the full-screen overlay, so the click
+      // looks like it did nothing. Leave the office first, then scroll — the same
+      // thing the start screen's Experience link does.
+      if (hashLink) a.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        exitGame();
+        const t = document.getElementById(e.link.slice(e.link.indexOf('#') + 1));
+        if (t) t.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth' });
+        else window.scrollTo(0, 0);
+      });
       dlgActions.appendChild(a);
     }
     if (e.id === 'stairs_exit') {
