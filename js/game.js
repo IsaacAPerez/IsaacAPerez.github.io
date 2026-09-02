@@ -426,7 +426,7 @@
     { id: 'mailbox_email', x: 3, y: 19, w: 1, h: 1, kind: 'deskitem', icon: 'mail', core: true, group: 'contact', kicker: 'Email', title: 'Drop a Line', body: 'Projects, roles, collabs, good ideas: iperez2435@gmail.com. I actually reply.', link: 'mailto:iperez2435@gmail.com', linkLabel: 'Email me' },
     { id: 'statue_github', x: 5, y: 19, w: 1, h: 1, kind: 'deskitem', icon: 'github', core: true, group: 'contact', kicker: 'GitHub', title: 'On GitHub', body: 'A thousand green squares and the occasional heroic 2 a.m. commit. The public log is open for inspection.', link: 'https://github.com/IsaacAPerez', linkLabel: 'Open GitHub' },
     { id: 'portal_linkedin', x: 7, y: 19, w: 1, h: 1, kind: 'deskitem', icon: 'linkedin', core: true, group: 'contact', kicker: 'LinkedIn', title: 'On LinkedIn', body: 'The official record of titles, dates, and endorsements. Recruiters, this is your shortcut.', link: 'https://linkedin.com/in/isaacabelperez', linkLabel: 'Open LinkedIn' },
-    { id: 'chest_resume', x: 10, y: 19, w: 1, h: 1, kind: 'printer', core: true, group: 'contact', kicker: 'Résumé', title: 'The Résumé', body: 'The printer hums and hands you a fresh page — one page, zero fluff. Take a copy.', link: 'Resume.pdf', linkLabel: 'Take the résumé' },
+    { id: 'chest_resume', x: 10, y: 19, w: 1, h: 1, kind: 'printer', core: true, group: 'contact', kicker: 'Résumé', title: 'The Résumé', body: "The printer is warming up — the current one-pager isn't in the tray yet. The framed roles on the wall carry the same story: where, when, and what shipped.", link: '/#experience', linkLabel: 'See the experience' },
 
     // --- Secret ---
     { id: 'wall_cracked', x: 35, y: 21, w: 1, h: 1, kind: 'fridge', core: false, kicker: 'Mini-Fridge', title: 'The Mini-Fridge', body: "It hums a little louder than the rest. You open it — and there, on the middle shelf, glowing faintly: one perfect golden taco. Isaac's documented weakness, kept on ice. Curiosity: maxed." },
@@ -767,7 +767,9 @@
       const a = document.createElement('a');
       a.className = 'btn btn-gold';
       a.href = e.link;
-      if (!e.link.startsWith('mailto:')) { a.target = '_blank'; a.rel = 'noopener'; }
+      // Internal hash links go back to the page itself — a new tab for that is wrong.
+      const internal = e.link.startsWith('mailto:') || e.link.startsWith('#') || e.link.startsWith('/#');
+      if (!internal) { a.target = '_blank'; a.rel = 'noopener'; }
       a.textContent = e.linkLabel || 'Open';
       a.addEventListener('click', () => { if (e.group === 'contact') gUnlock('raven'); });
       dlgActions.appendChild(a);
@@ -1656,6 +1658,15 @@
   document.getElementById('gameStartBtn').addEventListener('click', startGame);
   document.getElementById('gameSkipBtn').addEventListener('click', () => { exitGame(); window.scrollTo(0, 0); });
   document.getElementById('gameExitBtn').addEventListener('click', exitGame);
+  // Start-screen recruiter link: leave the office and land on the Experience section.
+  const resumeLink = document.getElementById('gameResumeLink');
+  if (resumeLink) resumeLink.addEventListener('click', (ev) => {
+    ev.preventDefault();
+    exitGame();
+    const t = document.getElementById('experience');
+    if (t) t.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth' });
+    else window.scrollTo(0, 0);
+  });
   document.getElementById('gameAchBtn').addEventListener('click', openAchievements);
   function syncMute() { muteBtn.textContent = state.muted ? '🔇' : '🔊'; }
   muteBtn.addEventListener('click', () => { state.muted = !state.muted; saveState(); syncMute(); ensureAudio(); });
