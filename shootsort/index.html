@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="ShootSort — a macOS app that files a shoot the moment the card mounts. Verified copies sorted by year, camera, and month. It never touches the card.">
+  <meta name="author" content="Isaac Perez">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="ShootSort — file a shoot the moment the card mounts">
+  <meta property="og:description" content="A macOS app that copies SD-card media onto an SSD, checksum-verified and sorted by year, camera, and month. It never writes to the card.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://isaacperez.co/shootsort/">
+  <meta property="og:image" content="https://isaacperez.co/isaac.JPG">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ShootSort — file a shoot the moment the card mounts">
+  <meta name="twitter:description" content="A macOS app that copies SD-card media onto an SSD, checksum-verified and sorted by year, camera, and month. It never writes to the card.">
+  <meta name="twitter:image" content="https://isaacperez.co/isaac.JPG">
+
+  <link rel="canonical" href="https://isaacperez.co/shootsort/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+  <title>ShootSort — Isaac Perez</title>
+
+  <!-- Prevent flash of wrong theme -->
+  <script>
+    (function () {
+      var t = localStorage.getItem('theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/site.css">
+
+  <style>
+    /* Page-scoped: ShootSort is a single page and does not earn a stylesheet. */
+    .ss-hero { min-height: 62svh; padding-top: 120px; padding-bottom: 88px; }
+    .ss-hero .hero-title { font-size: clamp(2.6rem, 8vw, 5rem); }
+    .ss-hero .hero-sub { max-width: 640px; }
+
+    .ss-note { margin-top: 20px; font-size: 14px; color: var(--text-3); }
+
+    .ss-promise {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 28px 30px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--card, transparent);
+    }
+    .ss-promise .glyph { font-size: 30px; line-height: 1; flex-shrink: 0; }
+    .ss-promise h3 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .ss-promise p { color: var(--text-2); line-height: 1.6; }
+
+    .ss-tree {
+      overflow-x: auto;
+      padding: 24px 26px;
+      border: 1px solid var(--line-soft);
+      border-radius: 18px;
+      font-family: 'JetBrains Mono', 'SF Mono', monospace;
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--text-2);
+      white-space: pre;
+      margin: 0;
+    }
+    .ss-tree b { color: var(--text); font-weight: 600; }
+
+    .ss-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line-soft); border-radius: 18px; overflow: hidden; }
+    .ss-cell { background: var(--bg); padding: 30px 26px; }
+    .ss-cell h3 { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .ss-cell p { font-size: 0.98rem; color: var(--text-2); line-height: 1.55; }
+
+    @media (max-width: 860px) {
+      .ss-grid { grid-template-columns: 1fr; }
+      .ss-promise { flex-direction: column; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- ==================== NAV ==================== -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">Isaac Perez</a>
+      <ul class="nav-links">
+        <li><a href="/#work">Work</a></li>
+        <li><a href="/photo/">Photo</a></li>
+        <li><a href="/#experience">Experience</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#contact" class="nav-cta">Contact</a></li>
+        <li>
+          <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4.5"/><line x1="12" y1="1.5" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22.5"/><line x1="3.5" y1="3.5" x2="5.3" y2="5.3"/><line x1="18.7" y1="18.7" x2="20.5" y2="20.5"/><line x1="1.5" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22.5" y2="12"/><line x1="3.5" y1="20.5" x2="5.3" y2="18.7"/><line x1="18.7" y1="5.3" x2="20.5" y2="3.5"/></svg>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="top">
+    <!-- ==================== HERO ==================== -->
+    <header class="hero ss-hero">
+      <div class="hero-bg"><span class="b1"></span><span class="b2"></span></div>
+      <div class="hero-inner" id="heroInner">
+        <p class="hero-eyebrow" data-reveal>macOS · Swift · SwiftUI</p>
+        <h1 class="hero-title" id="heroTitle"><span class="w">ShootSort</span></h1>
+        <p class="hero-sub" data-reveal style="--d:520ms">
+          Plug in the card. The shoot is filed before you've put the camera down —
+          checksum-verified copies sorted by year, camera, and month.
+        </p>
+        <div class="hero-actions" data-reveal style="--d:640ms">
+          <a href="https://github.com/IsaacAPerez/ShootSort-releases/releases/latest/download/ShootSort.zip" class="btn btn-pill">Download for macOS</a>
+          <a href="https://github.com/IsaacAPerez/ShootSort-releases/releases" target="_blank" rel="noopener" class="btn btn-text">All releases <span class="arrow">→</span></a>
+        </div>
+        <p class="ss-note" data-reveal style="--d:760ms">
+          Apple silicon, macOS 14 or later. Developer ID signed and notarized —
+          unzip, drag <b>ShootSort.app</b> to Applications, open it.
+        </p>
+      </div>
+    </header>
+
+    <!-- ==================== THE PROMISE ==================== -->
+    <section class="sec-pad" id="promise">
+      <div class="wrap">
+        <div class="ss-promise" data-reveal>
+          <span class="glyph">🔒</span>
+          <div>
+            <h3>It never touches the card.</h3>
+            <p>
+              ShootSort only ever reads the source. It does not delete, rename, move,
+              or rewrite a single file on the card — every ingest is a copy, verified
+              by checksum before it counts as done. Ejecting after a successful copy is
+              opt-in, and even then it only ejects; it never erases.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== STRUCTURE ==================== -->
+    <section class="sec-pad" id="structure">
+      <div class="wrap">
+        <div class="sec-head" data-reveal>
+          <p class="eyebrow">The structure</p>
+          <h2 class="sec-title">One shape, every shoot.</h2>
+        </div>
+        <pre class="ss-tree" data-reveal><b>&lt;SSD&gt;/&lt;Year&gt;/&lt;Camera&gt;/&lt;Photos|Videos&gt;/&lt;Month&gt;/&lt;file&gt;</b>
+
+2026/A7 IV/Photos/06 June/DSC00001.JPG
+2025/FX3/Photos/12 December/DSC00003.JPG
+2026/A7 IV/Videos/06 June/C0001.MP4</pre>
+      </div>
+    </section>
+
+    <!-- ==================== WHAT IT DOES ==================== -->
+    <section class="sec-pad" id="features">
+      <div class="wrap">
+        <div class="sec-head" data-reveal>
+          <p class="eyebrow">What it does</p>
+          <h2 class="sec-title">Filing, not fiddling.</h2>
+        </div>
+        <div class="ss-grid" data-reveal>
+          <div class="ss-cell">
+            <h3>Mounts, then files</h3>
+            <p>Watches for cards and starts the ingest the moment one appears — optionally only when your chosen SSD is mounted.</p>
+          </div>
+          <div class="ss-cell">
+            <h3>Verified copies</h3>
+            <p>Every file is copied and checksummed. A shoot is only marked done once the copy matches the original byte for byte.</p>
+          </div>
+          <div class="ss-cell">
+            <h3>Before and after</h3>
+            <p>A dual-pane window shows the card on the left and the organized SSD on the right, with live progress and a recent-activity log.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CTA ==================== -->
+    <section class="contact wrap">
+      <h2 data-reveal>Built for my own<br>card workflow.</h2>
+      <p data-reveal style="--d:120ms">ShootSort came out of shooting enough that filing became the bottleneck. If it fits yours too, it's free — and if it doesn't, tell me what's missing.</p>
+      <div class="hero-actions" data-reveal style="--d:220ms">
+        <a href="https://github.com/IsaacAPerez/ShootSort-releases/releases/latest/download/ShootSort.zip" class="btn btn-pill">Download for macOS</a>
+        <a href="/#contact" class="btn btn-text">Get in touch <span class="arrow">→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="foot wrap">
+    <small>© 2026 Isaac Perez</small>
+    <div class="foot-links">
+      <a href="/">Home</a>
+      <a href="/#work">Work</a>
+      <a href="/#contact">Contact</a>
+    </div>
+  </footer>
+
+  <script src="/js/site.js" defer></script>
+</body>
+</html>
