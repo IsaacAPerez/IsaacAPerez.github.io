@@ -573,7 +573,6 @@
     for (const e of ENTITIES) {
       if (!e.solid) continue;
       if (e.id === 'wall_cracked') continue; // baked into the wall grid
-      if (e.id === 'shrine_taco' && !state.vaultOpen) continue;
       const ex1 = e.px, ey1 = e.py, ex2 = e.px + e.w * TILE, ey2 = e.py + e.h * TILE;
       if (px + hw > ex1 && px - hw < ex2 && py + hh > ey1 && py - hh < ey2) return true;
     }
@@ -679,7 +678,6 @@
     for (const e of ENTITIES) {
       if (e.decor) continue;
       if (e.id === 'wall_cracked' && state.vaultOpen) continue;
-      if (e.id === 'shrine_taco' && !state.vaultOpen) continue;
       const cx = e.px + e.w * TILE / 2, cy = e.py + e.h * TILE / 2;
       if (Math.abs(wx - cx) < TILE && Math.abs(wy - cy) < TILE &&
           Math.hypot(player.x - cx, player.y - cy) < 2.2 * TILE) {
@@ -701,7 +699,6 @@
     for (const e of ENTITIES) {
       if (e.decor) continue;
       if (e.id === 'wall_cracked' && state.vaultOpen) continue;
-      if (e.id === 'shrine_taco' && !state.vaultOpen) continue;
       const cx = e.px + e.w * TILE / 2, cy = e.py + e.h * TILE / 2;
       let d = Math.hypot(player.x - cx, player.y - (cy + (e.h > 1 ? e.h * TILE / 4 : 0)));
       if (e.w > 1 || e.h > 1) d -= TILE * 0.4;
@@ -1654,7 +1651,6 @@
     if (dialogOpen) closeDialog();
     root.classList.remove('active');
     document.body.classList.remove('game-active');
-    try { sessionStorage.setItem('ip-game-skip', '1'); } catch (e) {}
   }
 
   document.getElementById('gameStartBtn').addEventListener('click', startGame);
@@ -1667,10 +1663,7 @@
 
   // Re-entry from the classic site
   const playBtn = document.getElementById('playGameBtn');
-  if (playBtn) playBtn.addEventListener('click', () => {
-    try { sessionStorage.removeItem('ip-game-skip'); } catch (e) {}
-    openOverlay();
-  });
+  if (playBtn) playBtn.addEventListener('click', openOverlay);
 
   // Debug/QA handle (also handy in devtools)
   window.__ipGame = {
