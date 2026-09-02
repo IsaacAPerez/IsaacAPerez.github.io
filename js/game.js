@@ -392,10 +392,10 @@
 
     // --- Shipped Apps: phones on a console ---
     { id: 'console_apps', x: 26, y: 4, w: 9, h: 2, kind: 'furniture', tone: 'console', decor: true, flat: true },
-    { id: 'cab_curbside', x: 27, y: 4, w: 1, h: 1, kind: 'phone', emoji: '🚚', accent: '#e8590c', core: true, group: 'project', kicker: 'Building Now', title: 'CurbSide', body: 'A street-food discovery iOS app for finding the taco truck before the line forms. Currently cooking, launching soon. Built in SwiftUI on a Supabase backend.', link: 'https://thecurbside.app', linkLabel: 'Visit thecurbside.app' },
+    { id: 'cab_curbside', x: 27, y: 4, w: 1, h: 1, kind: 'phone', emoji: '🚚', accent: '#e8590c', core: true, group: 'project', kicker: 'On the App Store', title: 'CurbSide', body: 'A street-food discovery iOS app for finding the taco truck before the line forms. Shipped in SwiftUI on a Supabase backend and live on the App Store.', link: 'https://thecurbside.app', linkLabel: 'Visit thecurbside.app' },
     { id: 'cab_runsbyip', x: 29, y: 4, w: 1, h: 1, kind: 'phone', emoji: '🏀', accent: '#b86cff', core: true, group: 'project', kicker: 'Live', title: 'Runs by IP', body: "Weekly pickup basketball in LA with RSVPs and payments built in — no flaky group chats, no 'who's got cash.' Founded, built, and occasionally crossed-over-at by Isaac. SwiftUI, Supabase, Stripe, with waitlists and a team randomizer under the hood.", link: 'https://runsbyip.com', linkLabel: 'Join at runsbyip.com' },
-    { id: 'cab_kangs', x: 31, y: 4, w: 1, h: 1, kind: 'phone', emoji: '🍜', accent: '#4aa8ff', core: true, group: 'project', kicker: 'Live', title: "Kang's Kuisine", body: 'Online ordering for a Korean pop-up kitchen: menu drops, pre-orders, instant sellouts. Next.js + Supabase + Stripe, with real-time inventory and an admin dashboard. (The tteokbokki handles marketing.)', link: 'https://www.kangskuisine.food', linkLabel: 'Order at kangskuisine.food' },
-    { id: 'cab_teamup', x: 33, y: 4, w: 1, h: 1, kind: 'phone', emoji: '⚽', accent: '#4ade80', core: true, group: 'project', kicker: 'On the App Store', title: 'TeamUp', body: 'Find a pickup game for any sport and join in two taps. Shipped in SwiftUI on Firebase and live on the App Store right now — the one you can download without leaving your seat.', link: 'https://theteamup.app', linkLabel: 'Visit theteamup.app' },
+    { id: 'cab_kangs', x: 31, y: 4, w: 1, h: 1, kind: 'phone', emoji: '🍜', accent: '#4aa8ff', core: true, group: 'project', kicker: 'Live', title: "Kang's Kuisine", body: 'Online ordering for a Korean pop-up kitchen: menu drops, pre-orders, instant sellouts. Next.js + Supabase + Stripe, with real-time inventory and an admin dashboard. (The tteokbokki handles marketing.)', link: 'https://www.kangskuisine.com', linkLabel: 'Order at kangskuisine.com' },
+    { id: 'cab_teamup', x: 33, y: 4, w: 1, h: 1, kind: 'phone', emoji: '⚽', accent: '#4ade80', core: true, group: 'project', kicker: 'On the App Store', title: 'TeamUp', body: 'Find a pickup game for any sport and join in two taps. Shipped in SwiftUI on Supabase and live on the App Store right now — the one you can download without leaving your seat.', link: 'https://theteamup.app', linkLabel: 'Visit theteamup.app' },
 
     // --- Camera Corner ---
     { id: 'gear_shelf', x: 33, y: 9, w: 4, h: 1, kind: 'furniture', tone: 'shelf', decor: true, flat: true },
@@ -426,7 +426,7 @@
     { id: 'mailbox_email', x: 3, y: 19, w: 1, h: 1, kind: 'deskitem', icon: 'mail', core: true, group: 'contact', kicker: 'Email', title: 'Drop a Line', body: 'Projects, roles, collabs, good ideas: iperez2435@gmail.com. I actually reply.', link: 'mailto:iperez2435@gmail.com', linkLabel: 'Email me' },
     { id: 'statue_github', x: 5, y: 19, w: 1, h: 1, kind: 'deskitem', icon: 'github', core: true, group: 'contact', kicker: 'GitHub', title: 'On GitHub', body: 'A thousand green squares and the occasional heroic 2 a.m. commit. The public log is open for inspection.', link: 'https://github.com/IsaacAPerez', linkLabel: 'Open GitHub' },
     { id: 'portal_linkedin', x: 7, y: 19, w: 1, h: 1, kind: 'deskitem', icon: 'linkedin', core: true, group: 'contact', kicker: 'LinkedIn', title: 'On LinkedIn', body: 'The official record of titles, dates, and endorsements. Recruiters, this is your shortcut.', link: 'https://linkedin.com/in/isaacabelperez', linkLabel: 'Open LinkedIn' },
-    { id: 'chest_resume', x: 10, y: 19, w: 1, h: 1, kind: 'printer', core: true, group: 'contact', kicker: 'Résumé', title: 'The Résumé', body: 'The printer hums and hands you a fresh page — one page, zero fluff. Take a copy.', link: 'Resume.pdf', linkLabel: 'Take the résumé' },
+    { id: 'chest_resume', x: 10, y: 19, w: 1, h: 1, kind: 'printer', core: true, group: 'contact', kicker: 'Résumé', title: 'The Résumé', body: "The printer is warming up — the current one-pager isn't in the tray yet. The framed roles on the wall carry the same story: where, when, and what shipped.", link: '/#experience', linkLabel: 'See the experience' },
 
     // --- Secret ---
     { id: 'wall_cracked', x: 35, y: 21, w: 1, h: 1, kind: 'fridge', core: false, kicker: 'Mini-Fridge', title: 'The Mini-Fridge', body: "It hums a little louder than the rest. You open it — and there, on the middle shelf, glowing faintly: one perfect golden taco. Isaac's documented weakness, kept on ice. Curiosity: maxed." },
@@ -573,7 +573,6 @@
     for (const e of ENTITIES) {
       if (!e.solid) continue;
       if (e.id === 'wall_cracked') continue; // baked into the wall grid
-      if (e.id === 'shrine_taco' && !state.vaultOpen) continue;
       const ex1 = e.px, ey1 = e.py, ex2 = e.px + e.w * TILE, ey2 = e.py + e.h * TILE;
       if (px + hw > ex1 && px - hw < ex2 && py + hh > ey1 && py - hh < ey2) return true;
     }
@@ -679,7 +678,6 @@
     for (const e of ENTITIES) {
       if (e.decor) continue;
       if (e.id === 'wall_cracked' && state.vaultOpen) continue;
-      if (e.id === 'shrine_taco' && !state.vaultOpen) continue;
       const cx = e.px + e.w * TILE / 2, cy = e.py + e.h * TILE / 2;
       if (Math.abs(wx - cx) < TILE && Math.abs(wy - cy) < TILE &&
           Math.hypot(player.x - cx, player.y - cy) < 2.2 * TILE) {
@@ -701,7 +699,6 @@
     for (const e of ENTITIES) {
       if (e.decor) continue;
       if (e.id === 'wall_cracked' && state.vaultOpen) continue;
-      if (e.id === 'shrine_taco' && !state.vaultOpen) continue;
       const cx = e.px + e.w * TILE / 2, cy = e.py + e.h * TILE / 2;
       let d = Math.hypot(player.x - cx, player.y - (cy + (e.h > 1 ? e.h * TILE / 4 : 0)));
       if (e.w > 1 || e.h > 1) d -= TILE * 0.4;
@@ -770,9 +767,22 @@
       const a = document.createElement('a');
       a.className = 'btn btn-gold';
       a.href = e.link;
-      if (!e.link.startsWith('mailto:')) { a.target = '_blank'; a.rel = 'noopener'; }
+      // Internal hash links go back to the page itself — a new tab for that is wrong.
+      const hashLink = e.link.startsWith('#') || e.link.startsWith('/#');
+      const internal = hashLink || e.link.startsWith('mailto:');
+      if (!internal) { a.target = '_blank'; a.rel = 'noopener'; }
       a.textContent = e.linkLabel || 'Open';
       a.addEventListener('click', () => { if (e.group === 'contact') gUnlock('raven'); });
+      // A hash link only moves the page BEHIND the full-screen overlay, so the click
+      // looks like it did nothing. Leave the office first, then scroll — the same
+      // thing the start screen's Experience link does.
+      if (hashLink) a.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        exitGame();
+        const t = document.getElementById(e.link.slice(e.link.indexOf('#') + 1));
+        if (t) t.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth' });
+        else window.scrollTo(0, 0);
+      });
       dlgActions.appendChild(a);
     }
     if (e.id === 'stairs_exit') {
@@ -802,6 +812,60 @@
     canvas.focus({ preventScroll: true });
   }
   dlgClose.addEventListener('click', closeDialog);
+
+  // The trophy button used to exit the office and scrollIntoView('#achievements'),
+  // a section that has never existed — it just kicked the visitor to the top of
+  // the page. It now opens the badge list in the dialog, without leaving the room.
+  // Badge table: the achievement engine in index.html publishes window.__ipAch.
+  const ACH_FALLBACK = {
+    adventurer: ['🚪', 'Stepped Inside'], quests: ['📱', 'App Browser'],
+    historian: ['💼', 'Career Read'], lorekeeper: ['📚', 'Lore Keeper'],
+    statcheck: ['🛠️', 'Stat Checker'], shifter: ['🌗', 'Day / Night Shifter'],
+    raven: ['✉️', 'Reached Out'], completionist: ['👑', 'Whole Office Toured'],
+    konami: ['🕹️', 'Cheat Code Entered']
+  };
+  function openAchievements() {
+    const table = window.__ipAch || ACH_FALLBACK;
+    const owned = new Set(achStore());
+    const ids = Object.keys(table);
+    const scored = ids.filter(id => id !== 'konami');
+    dialogOpen = true; typing = false; fullText = '';
+    dlgEmoji.textContent = '🏆';
+    dlgKicker.textContent = 'Achievements';
+    dlgTitle.textContent = scored.filter(id => owned.has(id)).length + ' / ' + scored.length + ' unlocked';
+    dlgBody.textContent = '';
+    const list = document.createElement('ul');
+    list.className = 'game-ach-list';
+    ids.forEach(id => {
+      const got = owned.has(id);
+      const li = document.createElement('li');
+      li.className = 'game-ach' + (got ? ' is-unlocked' : '');
+      const em = document.createElement('span');
+      em.className = 'game-ach-emoji';
+      em.textContent = got ? table[id][0] : '🔒';
+      const nm = document.createElement('span');
+      nm.className = 'game-ach-name';
+      nm.textContent = table[id][1];
+      li.appendChild(em); li.appendChild(nm);
+      if (id === 'konami') {
+        const bonus = document.createElement('span');
+        bonus.className = 'game-ach-bonus';
+        bonus.textContent = 'bonus';
+        li.appendChild(bonus);
+      }
+      list.appendChild(li);
+    });
+    dlgBody.appendChild(list);
+    dlgActions.innerHTML = '';
+    const back = document.createElement('button');
+    back.className = 'btn btn-ghost';
+    back.textContent = 'Back to the Office';
+    back.addEventListener('click', closeDialog);
+    dlgActions.appendChild(back);
+    dlg.classList.add('open');
+    dlg.setAttribute('aria-modal', 'true');
+    setTimeout(() => back.focus({ preventScroll: true }), 60);
+  }
   function trapFocus(ev) {
     const els = [...dlg.querySelectorAll('a,button')].filter(el => el.offsetParent !== null);
     if (!els.length) return;
@@ -1600,28 +1664,28 @@
     if (dialogOpen) closeDialog();
     root.classList.remove('active');
     document.body.classList.remove('game-active');
-    try { sessionStorage.setItem('ip-game-skip', '1'); } catch (e) {}
   }
 
   document.getElementById('gameStartBtn').addEventListener('click', startGame);
   document.getElementById('gameSkipBtn').addEventListener('click', () => { exitGame(); window.scrollTo(0, 0); });
   document.getElementById('gameExitBtn').addEventListener('click', exitGame);
-  document.getElementById('gameAchBtn').addEventListener('click', () => {
+  // Start-screen recruiter link: leave the office and land on the Experience section.
+  const resumeLink = document.getElementById('gameResumeLink');
+  if (resumeLink) resumeLink.addEventListener('click', (ev) => {
+    ev.preventDefault();
     exitGame();
-    const t = document.getElementById('achievements');
+    const t = document.getElementById('experience');
     if (t) t.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth' });
     else window.scrollTo(0, 0);
   });
+  document.getElementById('gameAchBtn').addEventListener('click', openAchievements);
   function syncMute() { muteBtn.textContent = state.muted ? '🔇' : '🔊'; }
   muteBtn.addEventListener('click', () => { state.muted = !state.muted; saveState(); syncMute(); ensureAudio(); });
   syncMute();
 
   // Re-entry from the classic site
   const playBtn = document.getElementById('playGameBtn');
-  if (playBtn) playBtn.addEventListener('click', () => {
-    try { sessionStorage.removeItem('ip-game-skip'); } catch (e) {}
-    openOverlay();
-  });
+  if (playBtn) playBtn.addEventListener('click', openOverlay);
 
   // Debug/QA handle (also handy in devtools)
   window.__ipGame = {

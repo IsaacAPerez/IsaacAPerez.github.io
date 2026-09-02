@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Privacy Policy for the Souvenir iOS app — what leaves the device, and what does not.">
+  <meta name="author" content="Isaac Perez">
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://isaacperez.co/souvenir/privacy/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+
+  <title>Privacy Policy — Souvenir</title>
+
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/css/design-system.css">
+
+  <style>
+    body {
+      background: var(--color-surface);
+      color: var(--color-text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+    }
+
+    .legal-container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: var(--space-12) var(--space-6) var(--space-16);
+    }
+
+    .legal-header {
+      margin-bottom: var(--space-12);
+      padding-bottom: var(--space-8);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .legal-eyebrow {
+      font-size: var(--text-sm);
+      font-weight: var(--font-semibold);
+      color: var(--color-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--space-2);
+    }
+
+    .legal-title {
+      font-size: var(--text-3xl);
+      font-weight: var(--font-bold);
+      color: var(--color-text-primary);
+      margin: 0 0 var(--space-3);
+      letter-spacing: -0.02em;
+    }
+
+    .legal-meta {
+      font-size: var(--text-sm);
+      color: var(--color-text-tertiary);
+    }
+
+    .legal-content h2 {
+      font-size: var(--text-xl);
+      font-weight: var(--font-semibold);
+      color: var(--color-text-primary);
+      margin: var(--space-10) 0 var(--space-3);
+      letter-spacing: -0.01em;
+    }
+
+    .legal-content h2:first-child { margin-top: 0; }
+
+    .legal-content p,
+    .legal-content li {
+      font-size: var(--text-base);
+      color: var(--color-text-secondary);
+    }
+
+    .legal-content p {
+      margin: 0 0 var(--space-4);
+    }
+
+    .legal-content ul {
+      margin: 0 0 var(--space-4);
+      padding-left: var(--space-6);
+    }
+
+    .legal-content li {
+      margin-bottom: var(--space-2);
+    }
+
+    .legal-content a {
+      color: var(--color-accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s ease;
+    }
+
+    .legal-content a:hover {
+      border-bottom-color: var(--color-accent);
+    }
+
+    .legal-content strong {
+      color: var(--color-text-primary);
+      font-weight: var(--font-semibold);
+    }
+
+    .legal-footer {
+      margin-top: var(--space-12);
+      padding-top: var(--space-8);
+      border-top: 1px solid var(--color-border);
+      font-size: var(--text-sm);
+      color: var(--color-text-tertiary);
+    }
+
+    .legal-footer a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+    }
+
+    .legal-footer a:hover { color: var(--color-accent); }
+
+    .legal-content h3 {
+      font-size: var(--text-lg);
+      font-weight: var(--font-semibold);
+      color: var(--color-text-primary);
+      margin: var(--space-8) 0 var(--space-3);
+    }
+
+    .legal-content hr {
+      border: 0;
+      border-top: 1px solid var(--color-border);
+      margin: var(--space-10) 0;
+    }
+
+    .legal-content code {
+      font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+      font-size: 0.9em;
+      word-break: break-word;
+    }
+
+    .legal-pre {
+      overflow-x: auto;
+      padding: var(--space-4);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md, 10px);
+      font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+      font-size: var(--text-sm);
+      line-height: 1.6;
+      color: var(--color-text-secondary);
+      margin: 0 0 var(--space-4);
+    }
+
+    .legal-table-wrap { overflow-x: auto; margin: 0 0 var(--space-4); }
+
+    .legal-table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
+    }
+
+    .legal-table th,
+    .legal-table td {
+      text-align: left;
+      vertical-align: top;
+      padding: var(--space-2) var(--space-3);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .legal-table th { color: var(--color-text-primary); font-weight: var(--font-semibold); }
+  </style>
+</head>
+<body>
+  <main class="legal-container">
+    <header class="legal-header">
+      <div class="legal-eyebrow">Souvenir iOS App</div>
+      <h1 class="legal-title">What leaves the device</h1>
+      <p class="legal-meta">Privacy Policy · last checked against the code on August 31, 2026</p>
+    </header>
+
+    <article class="legal-content">
+      <p>Souvenir reads a photo library and prints books out of it. Most of that happens on the phone. One part does not, and this file is the exact account of which part.</p>
+      <p>It is written to be accurate rather than reassuring. Where something is not ours to promise, it says so.</p>
+      <hr>
+      <h2>The short version</h2>
+      <ul>
+        <li><strong>Reading the library is local.</strong> Dates, coordinates and orientations are read on the device and kept in an index on the device. No photograph is read by anything but this app.</li>
+        <li><strong>Pressing a book sends photographs.</strong> One frame per place — the representative photo the book prints — goes to Souvenir's generation service and on to OpenAI, which draws the poster. Its caption text goes with it.</li>
+        <li><strong>Nothing else is sent by the press.</strong> Not the library, not the index, not the other photos of that place, not GPS.</li>
+        <li><strong>We store no photograph anywhere but your phone.</strong> Our service keeps a spend ledger with no image data in it. What OpenAI keeps is OpenAI's policy, quoted below, and is the one link in this chain we cannot verify from here.</li>
+      </ul>
+      <hr>
+      <h2>What leaves, exactly</h2>
+      <h3>1. When you press a book — one photograph per place</h3>
+      <p>Per place spread, one request to <code>POST https://viqxskzgvvchrvhbbwia.supabase.co/functions/v1/generate-poster</code> over HTTPS, carrying:</p>
+      <div class="legal-table-wrap">
+      <table class="legal-table">
+        <thead><tr><th>field</th><th>what it is</th></tr></thead>
+        <tbody>
+          <tr><td><code>imageBase64</code></td><td>the place's representative photograph, re-encoded as a PNG and downscaled to at most 1536 px on its long edge</td></tr>
+          <tr><td><code>facts.place</code></td><td>the place's name as the book prints it, e.g. <code>PORTO VENERE</code></td></tr>
+          <tr><td><code>facts.no</code></td><td>the spread number, e.g. <code>03</code></td></tr>
+          <tr><td><code>facts.keywords</code></td><td>the three words the caption prints: the month, the frame count, the hour's light (e.g. <code>may</code>, <code>9 frames</code>, <code>dusk</code>)</td></tr>
+          <tr><td><code>facts.year</code></td><td>the four-digit year</td></tr>
+          <tr><td><code>placeKey</code></td><td>the spread number again, for our logs</td></tr>
+          <tr><td><code>deviceId</code></td><td>a random UUID this app minted (see below)</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>A five-place book therefore sends five photographs. The book's other photos — usually hundreds — never leave.</p>
+      <p><strong>The file we send carries no EXIF.</strong> It is a freshly rendered bitmap encoded as PNG, not a copy of the original file, so the original's metadata, including its GPS fix, is not in it. The photograph's <em>content</em> is of course still the photograph.</p>
+      <p>This is also what the pre-prompt says before the system's own dialog, at the same length the screen allows: the photographs stay here, naming a place asks Apple's map, pressing a book sends one frame per place plus the caption words and the rate-limiting id. If that screen and this file ever disagree, this file is the one that is wrong — the screen is the promise a person actually reads.</p>
+      <h3>2. When a place is named — coordinates go to Apple</h3>
+      <p>To turn a cluster of photos into "Porto Venere", the cluster's centre coordinate is reverse-geocoded with Apple's <code>CLGeocoder</code>. That is a network call to Apple carrying a latitude and longitude, once per place and once per trip, cached on disk so the same coordinate is never looked up twice. This is the standard iOS geocoding API and is governed by Apple's privacy policy.</p>
+      <h3>3. Always — fleet telemetry</h3>
+      <p>The app calls <code>PlatformKit.configure</code> at launch, which sends to the developer's own control plane (<code>fqnphkqymzbxdzyqgsji.supabase.co</code>):</p>
+      <ul>
+        <li>an <code>app_opened</code> analytics event: product id, event name, platform, OS and OS version, app version, environment, timestamp, and a <strong>per-launch</strong> session id that is regenerated every process start and never stored;</li>
+        <li>a registry heartbeat: product id, app version, platform, OS, OS version, device model (e.g. <code>iPhone16,2</code>), locale.</li>
+      </ul>
+      <p>No photo data, no place, no persistent identifier. Sentry crash reporting is compiled in but <strong>not enabled</strong> — this build ships an empty <code>SENTRY_DSN</code>, so nothing is sent to it.</p>
+      <hr>
+      <h2>What does not leave</h2>
+      <ul>
+        <li>The photo library, and any photograph other than the one chosen per place.</li>
+        <li>The asset index (<code>asset-index.json</code>): PhotoKit local identifiers, dates, coordinates, orientations. On-device only, always.</li>
+        <li>Photo coordinates, in the press path. The service is told a place <em>name</em>; it is never told where that place is. (Apple's geocoder is told — see above.)</li>
+        <li>The books themselves (<code>books.json</code>): titles, dates, routes, sampled inks, stamp assignments, place-centre coordinates, poster keys. On-device only.</li>
+        <li>Generated posters: they come back in the response and are written to <code>Caches/</code>. They are never uploaded anywhere. Each launch drops any poster no book on the shelf still refers to — a run you backed out of leaves nothing behind — and the system may purge the rest at any time, in which case the spread falls back to the photograph it was made from.</li>
+        <li>Any account, email, name, contact, or advertising identifier. Souvenir has no account system and asks for nothing.</li>
+      </ul>
+      <hr>
+      <h2>The device id</h2>
+      <p>The first time a book is pressed, the app mints a random UUID and keeps it in the keychain. It is sent with every generation request.</p>
+      <ul>
+        <li>It is <strong>not</strong> a hardware identifier. <code>identifierForVendor</code> was deliberately not used: it is shared with every other app from this developer and cannot be reset.</li>
+        <li>It exists for one purpose: the daily spending ceiling (40 generations per device per UTC day, 400 across all devices). It identifies a device to that ceiling and to nothing else.</li>
+        <li>It lives in the keychain rather than in app storage, which means <strong>it survives deleting and reinstalling the app.</strong> That is deliberate: a ceiling you can reset by reinstalling is not a ceiling. It is also the honest downside of this design, and it is stated here rather than buried.</li>
+      </ul>
+      <hr>
+      <h2>Where a photograph actually goes</h2>
+      <pre class="legal-pre">your phone ──https──▶ generate-poster            ──https──▶ OpenAI
+                      (Supabase Edge Function,              /v1/images/edits
+                       project viqxskzgvvchrvhbbwia,        model gpt-image-2
+                       us-west-1)
+                          │
+                          └── writes one ledger row: device id, spread number,
+                              status, token counts, cost. No image. No place name.</pre>
+      <p>The function holds the photograph in memory for the length of the request and writes it to no storage bucket, no table and no log. The poster comes back in the same response and is returned to the phone.</p>
+      <h3>Retention</h3>
+      <ul>
+        <li><strong>Us:</strong> nothing. <code>public.generation_ledger</code> contains device id, the spread number, an outcome, token counts and a cost in micro-dollars. There is no column that could hold an image, and none that holds a place name.</li>
+        <li><strong>OpenAI:</strong> their published API policy states that data submitted through the API is not used to train their models by default, and may be retained for up to 30 days for abuse monitoring before deletion. We pass their policy on; we cannot enforce or verify it from here. If that is not acceptable to you, the honest answer today is not to press a book.</li>
+      </ul>
+      <hr>
+      <h2>Turning it off</h2>
+      <p>There is <strong>no in-app switch</strong> for generation yet. What exists:</p>
+      <ul>
+        <li>A build without a generation key never sends anything. <code>isConfigured</code> is false, the press has nothing to send to, and every spread is printed by the app's own renderer. The press bench then says nothing about sending, because nothing is sent.</li>
+        <li>Denying photo library access stops everything, including the press: there is nothing to read and nothing to print.</li>
+      </ul>
+      <p>A per-book "print this one locally" toggle is a real gap. It is written down here rather than left implicit.</p>
+      <hr>
+      <h2>App Store privacy labels this implies</h2>
+      <div class="legal-table-wrap">
+      <table class="legal-table">
+        <thead><tr><th>Data type</th><th>Collected</th><th>Purpose</th><th>Linked to identity</th><th>Used for tracking</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Photos or Videos</strong></td><td>Yes</td><td>App Functionality</td><td>No</td><td>No</td></tr>
+          <tr><td><strong>Coarse Location</strong></td><td>Yes</td><td>App Functionality</td><td>No</td><td>No</td></tr>
+          <tr><td><strong>Identifiers → Device ID</strong></td><td>Yes</td><td>App Functionality</td><td>No</td><td>No</td></tr>
+          <tr><td><strong>Diagnostics / Usage Data</strong></td><td>No</td><td>—</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>Reasoning, so the answers can be checked rather than trusted:</p>
+      <ul>
+        <li><strong>Photos.</strong> Apple counts data as <em>collected</em> when it is transmitted off the device and can be accessed for longer than servicing the request in real time. Our own service does not retain it, but OpenAI's abuse-monitoring window can — so this is declared as collected, not as merely transmitted.</li>
+        <li><strong>Coarse Location.</strong> The place <em>name</em> (a city or district) is transmitted as caption text, and coordinates are sent to Apple's geocoder. A city-level name is coarser than a city block, so it is Coarse rather than Precise. Precise coordinates never reach our service.</li>
+        <li><strong>Device ID.</strong> The random per-install UUID is transmitted for rate limiting. It is not linked to any identity because there is no identity in this app to link it to, and it is never used to track across apps or websites.</li>
+        <li><strong>Diagnostics / Usage Data.</strong> The fleet analytics event and heartbeat go to the developer's own control plane and carry no persistent identifier — but they are still product analytics. If this app is submitted with those calls live, <strong>Usage Data → Product Interaction → App Functionality/Analytics, not linked, not tracking</strong> must be declared as well. Declared here as a requirement rather than an afterthought at submission time.</li>
+      </ul>
+      <hr>
+      <p>Last checked against the code on 2026-08-31: <code>Souvenir/Generation/</code>, <code>Souvenir/Views/Press/PressComposer.swift</code>, <code>Souvenir/Library/Geocoder.swift</code>, <code>Souvenir/SouvenirApp.swift</code>, <code>supabase/functions/generate-poster/index.ts</code>.</p>
+    </article>
+
+    <footer class="legal-footer">
+      <a href="/">&larr; Back to isaacperez.co</a>
+    </footer>
+  </main>
+</body>
+</html>

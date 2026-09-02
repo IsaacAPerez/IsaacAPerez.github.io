@@ -39,6 +39,58 @@
 
   <link rel="stylesheet" href="/css/site.css">
   <link rel="stylesheet" href="/css/photo.css">
+
+  <!-- Structured Data: the four packages priced on this page, as Offers on the
+       ProfessionalService declared at /photo/#business. Prices mirror the cards
+       below — keep the two in step. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "OfferCatalog",
+    "@id": "https://isaacperez.co/photo/pricing/#catalog",
+    "name": "CapturedByIP photo & video packages",
+    "url": "https://isaacperez.co/photo/pricing/",
+    "provider": { "@id": "https://isaacperez.co/photo/#business" },
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "Sports Coverage",
+        "url": "https://isaacperez.co/photo/pricing/",
+        "priceSpecification": { "@type": "PriceSpecification", "minPrice": "300", "priceCurrency": "USD", "valueAddedTaxIncluded": false },
+        "availability": "https://schema.org/InStock",
+        "areaServed": { "@type": "City", "name": "Los Angeles" },
+        "itemOffered": { "@type": "Service", "name": "Sports Coverage", "description": "Game or session coverage with 40-60 professionally edited photos, color corrected and delivery-ready." }
+      },
+      {
+        "@type": "Offer",
+        "name": "Real Estate Content",
+        "url": "https://isaacperez.co/photo/pricing/",
+        "priceSpecification": { "@type": "PriceSpecification", "minPrice": "250", "priceCurrency": "USD", "valueAddedTaxIncluded": false },
+        "availability": "https://schema.org/InStock",
+        "areaServed": { "@type": "City", "name": "Los Angeles" },
+        "itemOffered": { "@type": "Service", "name": "Real Estate Content", "description": "Interior and exterior photography with MLS-ready exports." }
+      },
+      {
+        "@type": "Offer",
+        "name": "Lifestyle & Brand",
+        "url": "https://isaacperez.co/photo/pricing/",
+        "priceSpecification": { "@type": "PriceSpecification", "minPrice": "400", "priceCurrency": "USD", "valueAddedTaxIncluded": false },
+        "availability": "https://schema.org/InStock",
+        "areaServed": { "@type": "City", "name": "Los Angeles" },
+        "itemOffered": { "@type": "Service", "name": "Lifestyle & Brand", "description": "Photo and video for personal brands, creators, and small businesses, built for social-first content." }
+      },
+      {
+        "@type": "Offer",
+        "name": "Drone-Only Coverage",
+        "url": "https://isaacperez.co/photo/pricing/",
+        "priceSpecification": { "@type": "PriceSpecification", "minPrice": "200", "priceCurrency": "USD", "valueAddedTaxIncluded": false },
+        "availability": "https://schema.org/InStock",
+        "areaServed": { "@type": "City", "name": "Los Angeles" },
+        "itemOffered": { "@type": "Service", "name": "Drone-Only Coverage", "description": "FAA-compliant aerial photo or video coverage with professionally stabilized footage." }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <!-- ==================== NAV ==================== -->

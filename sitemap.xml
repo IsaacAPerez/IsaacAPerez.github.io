@@ -16,12 +16,27 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://isaacperez.co/shootsort/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://isaacperez.co/souvenir/privacy/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
     <loc>https://isaacperez.co/roommate/privacy/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://isaacperez.co/roommate/terms/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://isaacperez.co/roommate/support/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

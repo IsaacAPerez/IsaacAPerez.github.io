@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <meta name="description" content="Page not found — isaacperez.co">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+  <title>Not found — Isaac Perez</title>
+
+  <!-- Prevent flash of wrong theme -->
+  <script>
+    (function () {
+      var t = localStorage.getItem('theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Absolute paths: this page is served for any bad URL at any depth. -->
+  <link rel="stylesheet" href="/css/site.css">
+
+  <style>
+    .nf { min-height: 100svh; display: grid; place-items: center; text-align: center; padding: 96px 24px; }
+    .nf-code {
+      font-family: 'JetBrains Mono', 'SF Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+    .nf h1 { font-size: clamp(2.4rem, 7vw, 4.4rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1.03; margin-bottom: 20px; }
+    .nf p { font-size: clamp(1.05rem, 2vw, 1.3rem); color: var(--text-2); max-width: 46ch; margin: 0 auto 36px; line-height: 1.55; }
+    .nf-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <main class="nf">
+    <div>
+      <p class="nf-code">Error 404</p>
+      <h1>This page moved on.</h1>
+      <p>The link you followed doesn't exist here anymore. Everything that does is one click away.</p>
+      <div class="nf-links">
+        <a href="/" class="btn btn-pill">Back home</a>
+        <a href="/photo/" class="btn btn-text">Photo &amp; video <span class="arrow">→</span></a>
+        <a href="/#contact" class="btn btn-text">Get in touch <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
