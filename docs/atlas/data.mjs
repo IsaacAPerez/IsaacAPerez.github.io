@@ -173,11 +173,11 @@ export const NODES = [
     id: 'G', code: 'G', name: "Isaac's Studio", short: 'THE OFFICE', group: 'runtime',
     gx: 6.5, gy: 6.5, w: 3, d: 3, h: 62, kind: 'tall',
     one: 'A walkable pixel home office layered over the landing page, where the furniture is the portfolio.',
-    what: 'Press "Explore my office" and a canvas takes the screen. You walk with WASD or a thumbstick, press E next to anything, and a typewriter dialog opens: the phones on the console are the shipped apps, the framed prints are the jobs, the shelf gadgets are the skills, the printer hands you the résumé. A Roomba wanders, a cat follows you, a drone unlocks, and a mini-fridge hides a taco.',
+    what: 'Press "Explore my office" and a canvas takes the screen. You walk with WASD or a thumbstick, press E next to anything, and a typewriter dialog opens: the phones on the console are the shipped apps, the framed prints are the jobs, the shelf gadgets are the skills, the printer points you at the Experience section. A Roomba wanders, a cat follows you, a drone unlocks, and a mini-fridge hides a taco.',
     how: 'One IIFE in <code>js/game.js</code>, 1,700 lines, no dependencies. A 40×26 tile map is built into a <code>Uint8Array</code> by <code>buildMap()</code>, then <code>bakeAtlas()</code>/<code>bakeWorld()</code> paint the whole room once into offscreen canvases; the frame loop only blits. <code>ENTITIES</code> is a 50-item array — 23 of them <code>core: true</code>, which is what the progress bar counts. A fixed-step loop (<code>STEP = 1/60</code>) drives <code>update()</code> and <code>render()</code>; audio is a tiny <mark>oscillator synth</mark> created on first gesture. <code>window.__ipGame</code> exposes <code>step</code>, <code>tp</code>, <code>inspect</code> and a <code>snapshot</code> getter for QA.',
     steps: [
       ['Boot', 'At load: buildMap() writes the tile grid, rebuildArt() reads the palette and bakes the atlas, character rigs and the world canvas.'],
-      ['Open', 'openOverlay() adds .active to #gameRoot and .game-active to the body element; the start screen offers Step Inside, Back to the site, or the résumé.'],
+      ['Open', 'openOverlay() adds .active to #gameRoot and .game-active to the body element; the start screen offers Step Inside, Back to the site, or a shortcut to the Experience section.'],
       ['Play', 'startGame() starts the rAF loop — update() moves the player, the Roomba, the cat and the drone; render() blits the baked world then sorts entities by screen-Y.'],
       ['Interact', 'E (or a tap within ~2.2 tiles) picks the nearest non-decor entity, plays a blip, opens the typewriter dialog and marks it visited.'],
       ['Persist', 'markVisited() writes the visited set to localStorage["ip-game-state"] and calls window.unlock() for that entity group.'],
@@ -438,7 +438,7 @@ export const CH = [
   {
     id: 'office', title: 'Step inside the office', reveal: ['G', 'A'],
     lede: `The one piece of real engineering: a walkable pixel studio where the furniture is the portfolio.`,
-    story: `<p><code>js/game.js</code> is ~1,700 lines of dependency-free canvas — a 40×26 tile room baked once into offscreen canvases, 50 entities of which <mark>23 are exhibits you can read</mark>, and a fixed-step loop that only blits. The phones are the apps, the frames are the jobs, the printer hands you the résumé.</p><p>Reading a group of exhibits pops a badge from the achievement engine inlined in <code>index.html</code>, and both halves persist to the same browser storage.</p>`,
+    story: `<p><code>js/game.js</code> is ~1,700 lines of dependency-free canvas — a 40×26 tile room baked once into offscreen canvases, 50 entities of which <mark>23 are exhibits you can read</mark>, and a fixed-step loop that only blits. The phones are the apps, the frames are the jobs, the printer sends you to the Experience section.</p><p>Reading a group of exhibits pops a badge from the achievement engine inlined in <code>index.html</code>, and both halves persist to the same browser storage.</p>`,
     flow: [
       ['L', 'G', 'Explore my office', { trigger: '#playGameBtn' }],
       ['G', 'S', 'load ip-game-state', { key: 'ip-game-state' }],

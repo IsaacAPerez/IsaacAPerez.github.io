@@ -147,14 +147,14 @@ whole pipeline — the only config in the tree is vercel.json, a response-header
 
 **In one line.** A walkable pixel home office layered over the landing page, where the furniture is the portfolio.
 
-**What it does.** Press "Explore my office" and a canvas takes the screen. You walk with WASD or a thumbstick, press E next to anything, and a typewriter dialog opens: the phones on the console are the shipped apps, the framed prints are the jobs, the shelf gadgets are the skills, the printer hands you the résumé. A Roomba wanders, a cat follows you, a drone unlocks, and a mini-fridge hides a taco.
+**What it does.** Press "Explore my office" and a canvas takes the screen. You walk with WASD or a thumbstick, press E next to anything, and a typewriter dialog opens: the phones on the console are the shipped apps, the framed prints are the jobs, the shelf gadgets are the skills, the printer points you at the Experience section. A Roomba wanders, a cat follows you, a drone unlocks, and a mini-fridge hides a taco.
 
 **How it's built.** One IIFE in `js/game.js`, 1,700 lines, no dependencies. A 40×26 tile map is built into a `Uint8Array` by `buildMap()`, then `bakeAtlas()`/`bakeWorld()` paint the whole room once into offscreen canvases; the frame loop only blits. `ENTITIES` is a 50-item array — 23 of them `core: true`, which is what the progress bar counts. A fixed-step loop (`STEP = 1/60`) drives `update()` and `render()`; audio is a tiny **oscillator synth** created on first gesture. `window.__ipGame` exposes `step`, `tp`, `inspect` and a `snapshot` getter for QA.
 
 **Steps in execution.**
 
 1. **Boot** — At load: buildMap() writes the tile grid, rebuildArt() reads the palette and bakes the atlas, character rigs and the world canvas.
-2. **Open** — openOverlay() adds .active to #gameRoot and .game-active to the body element; the start screen offers Step Inside, Back to the site, or the résumé.
+2. **Open** — openOverlay() adds .active to #gameRoot and .game-active to the body element; the start screen offers Step Inside, Back to the site, or a shortcut to the Experience section.
 3. **Play** — startGame() starts the rAF loop — update() moves the player, the Roomba, the cat and the drone; render() blits the baked world then sorts entities by screen-Y.
 4. **Interact** — E (or a tap within ~2.2 tiles) picks the nearest non-decor entity, plays a blip, opens the typewriter dialog and marks it visited.
 5. **Persist** — markVisited() writes the visited set to localStorage["ip-game-state"] and calls window.unlock() for that entity group.
