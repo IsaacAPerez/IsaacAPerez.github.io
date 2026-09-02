@@ -802,6 +802,60 @@
     canvas.focus({ preventScroll: true });
   }
   dlgClose.addEventListener('click', closeDialog);
+
+  // The trophy button used to exit the office and scrollIntoView('#achievements'),
+  // a section that has never existed — it just kicked the visitor to the top of
+  // the page. It now opens the badge list in the dialog, without leaving the room.
+  // Badge table: the achievement engine in index.html publishes window.__ipAch.
+  const ACH_FALLBACK = {
+    adventurer: ['🚪', 'Stepped Inside'], quests: ['📱', 'App Browser'],
+    historian: ['💼', 'Career Read'], lorekeeper: ['📚', 'Lore Keeper'],
+    statcheck: ['🛠️', 'Stat Checker'], shifter: ['🌗', 'Day / Night Shifter'],
+    raven: ['✉️', 'Reached Out'], completionist: ['👑', 'Whole Office Toured'],
+    konami: ['🕹️', 'Cheat Code Entered']
+  };
+  function openAchievements() {
+    const table = window.__ipAch || ACH_FALLBACK;
+    const owned = new Set(achStore());
+    const ids = Object.keys(table);
+    const scored = ids.filter(id => id !== 'konami');
+    dialogOpen = true; typing = false; fullText = '';
+    dlgEmoji.textContent = '🏆';
+    dlgKicker.textContent = 'Achievements';
+    dlgTitle.textContent = scored.filter(id => owned.has(id)).length + ' / ' + scored.length + ' unlocked';
+    dlgBody.textContent = '';
+    const list = document.createElement('ul');
+    list.className = 'game-ach-list';
+    ids.forEach(id => {
+      const got = owned.has(id);
+      const li = document.createElement('li');
+      li.className = 'game-ach' + (got ? ' is-unlocked' : '');
+      const em = document.createElement('span');
+      em.className = 'game-ach-emoji';
+      em.textContent = got ? table[id][0] : '🔒';
+      const nm = document.createElement('span');
+      nm.className = 'game-ach-name';
+      nm.textContent = table[id][1];
+      li.appendChild(em); li.appendChild(nm);
+      if (id === 'konami') {
+        const bonus = document.createElement('span');
+        bonus.className = 'game-ach-bonus';
+        bonus.textContent = 'bonus';
+        li.appendChild(bonus);
+      }
+      list.appendChild(li);
+    });
+    dlgBody.appendChild(list);
+    dlgActions.innerHTML = '';
+    const back = document.createElement('button');
+    back.className = 'btn btn-ghost';
+    back.textContent = 'Back to the Office';
+    back.addEventListener('click', closeDialog);
+    dlgActions.appendChild(back);
+    dlg.classList.add('open');
+    dlg.setAttribute('aria-modal', 'true');
+    setTimeout(() => back.focus({ preventScroll: true }), 60);
+  }
   function trapFocus(ev) {
     const els = [...dlg.querySelectorAll('a,button')].filter(el => el.offsetParent !== null);
     if (!els.length) return;
@@ -1606,12 +1660,7 @@
   document.getElementById('gameStartBtn').addEventListener('click', startGame);
   document.getElementById('gameSkipBtn').addEventListener('click', () => { exitGame(); window.scrollTo(0, 0); });
   document.getElementById('gameExitBtn').addEventListener('click', exitGame);
-  document.getElementById('gameAchBtn').addEventListener('click', () => {
-    exitGame();
-    const t = document.getElementById('achievements');
-    if (t) t.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth' });
-    else window.scrollTo(0, 0);
-  });
+  document.getElementById('gameAchBtn').addEventListener('click', openAchievements);
   function syncMute() { muteBtn.textContent = state.muted ? '🔇' : '🔊'; }
   muteBtn.addEventListener('click', () => { state.muted = !state.muted; saveState(); syncMute(); ensureAudio(); });
   syncMute();

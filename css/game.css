@@ -358,6 +358,56 @@
 
 .game-dialog-actions .btn { padding: 10px 18px; font-size: 14px; }
 
+/* Achievements panel (rendered into the dialog body by openAchievements) */
+.game-ach-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+
+.game-ach {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: transparent;
+  opacity: 0.45;
+}
+
+.game-ach.is-unlocked {
+  opacity: 1;
+  border-color: var(--gold);
+  background: var(--gold-subtle);
+}
+
+.game-ach-emoji { font-size: 18px; line-height: 1; flex-shrink: 0; }
+
+.game-ach-name {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.game-ach-bonus {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+@media (max-width: 560px) {
+  .game-ach-list { grid-template-columns: 1fr; }
+}
+
 .game-dialog-close {
   margin-left: auto;
   align-self: center;

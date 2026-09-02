@@ -379,6 +379,9 @@
         raven: ['✉️', 'Reached Out'], completionist: ['👑', 'Whole Office Toured'],
         konami: ['🕹️', 'Cheat Code Entered']
       };
+      // Published so the game's 🏆 panel (js/game.js openAchievements) can render
+      // the same badge table instead of scrolling to a section that never existed.
+      window.__ipAch = A;
       var unlocked = new Set();
       try { unlocked = new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch (e) {}
       window.unlock = function (id) {
